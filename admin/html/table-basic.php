@@ -212,7 +212,7 @@
                                                     <a href="edit_course.php?c_id=<?php echo $course['c_id']; ?>" class="btn btn-primary">Edit</a>
                                                 </td>
                                                 <td>
-                                                    <a href="remove_course.php?c_id=<?php echo $course['c_id']; ?>" class="btn btn-primary">Remove</a>
+                                                    <a href="remove_course.php?c_id=<?php echo $course['c_id']; ?>" class="btn btn-primary" onclick="return confirm('Are you sure you want to remove this course?');">Remove</a>
                                                 </td>
                                             </tr>
                                             <?php endforeach; ?>

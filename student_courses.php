@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
-
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/main.css">
-
+    <title>Student Courses</title>
     <style>
         /* Style for table */
         table.table-bordered {
@@ -34,29 +33,41 @@
             text-align: center;
         }
     </style>
-</head>
 
+
+</head>
 <body>
     <?php
-    include 'db_conn.php';
+    session_start(); // Ensure this is at the top to start or resume a session
+    include 'db_conn.php'; // Adjust the path as necessary
+
+    // Check if the user is logged in, using the same session variable as set in login script
+    if (!isset($_SESSION['user_id'])) {
+        die("You must be logged in to perform this action.");
+    }
+    $s_id = $_SESSION['user_id']; // Use the same session variable name as in the login script
 
     try {
-        $stmt = $pdo->prepare("SELECT * FROM courses");
-        $stmt->execute();
+        // Adjusted query to fetch user-specific courses along with c   ourse names and professors
+        $stmt = $pdo->prepare("
+            SELECT sc.*, c.c_name, c.c_prof, c.c_time
+            FROM student_courses sc
+            JOIN courses c ON sc.c_id = c.c_id
+            WHERE sc.s_id = ?
+        ");
+        $stmt->execute([$s_id]);
         $courses = $stmt->fetchAll();
     } catch (PDOException $e) {
         die("Could not fetch courses: " . $e->getMessage());
     }
     ?>
-     <nav class="navbar">
+
+<nav class="navbar">
         <!-- Navigation bar -->
         <div class="nav-container">
             <ul class="nav-menu">
                 <li class="nav-item">
-                    <a href="login.php" class="nav-link active">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a href="student_main.php" class="nav-link">Homepage</a>
+                    <a href="index.html" class="nav-link">Homepage</a>
                 </li>
                   <!-- Only show logout if the user is logged in -->
             <?php if (isset($_SESSION['user_id'])): ?>
@@ -67,8 +78,6 @@
             </ul>
         </div>
     </nav>
-
-
 
     <div class="container-fluid">
         <div class="row">
@@ -84,29 +93,21 @@
                                         <th>Course</th>
                                         <th>Professor</th>
                                         <th>Time</th>
-                                        <th> Day</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
-                                <tbody id="studentTableBody">
-                                    <?php if (is_array($courses) && !empty($courses)): ?>
-                                        <?php foreach ($courses as $course): ?>
-                                            <tr>
-                                                <td><?php echo htmlspecialchars($course['c_id']); ?></td>
-                                                <td><?php echo htmlspecialchars($course['c_name']); ?></td>
-                                                <td><?php echo htmlspecialchars($course['c_prof']); ?></td>
-                                                <td><?php echo htmlspecialchars($course['c_time']); ?></td>
-                                                <td><?php echo htmlspecialchars($course['c_day']); ?></td>
-                                                <td class="actions">
-                                                        <input type="checkbox" name="checkbox[]" value="<?php echo htmlspecialchars($course['c_id']); ?>">
-                                                    </td>
-                                            </tr>
-                                        <?php endforeach; ?>
-                                    <?php else: ?>
-                                        <tr>
-                                            <td colspan="5">No course found</td>
-                                        </tr>
-                                    <?php endif; ?>
+                                <tbody>
+                                    <?php foreach ($courses as $course): ?>
+                                    <tr>
+                                        <td><?= htmlspecialchars($course['c_id']); ?></td>
+                                        <td><?= htmlspecialchars($course['c_name']); ?></td>
+                                        <td><?= htmlspecialchars($course['c_prof']); ?></td>
+                                        <td><?= htmlspecialchars($course['c_time']); ?></td>
+                                        <td>
+                                            <a href="remove_course_student.php?c_id=<?= $course['c_id']; ?>" class="btn btn-primary">Remove</a>
+                                        </td>
+                                    </tr>
+                                    <?php endforeach; ?>
                                 </tbody>
                             </table>
                         </div>
@@ -116,5 +117,4 @@
         </div>
     </div>
 </body>
-
 </html>

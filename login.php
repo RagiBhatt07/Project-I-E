@@ -45,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION['user_id'] = $row['s_id'];
                 $_SESSION['email'] = $row['s_email'];
                 // Redirect the user to their dashboard (or other page)
-                header("location: calendar.html");
+                header("location: student_main.php");
                 exit;
             } else {
                 // Password is not valid

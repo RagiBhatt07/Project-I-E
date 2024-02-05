@@ -45,13 +45,10 @@
         <div class="nav-container">
             <ul class="nav-menu">
                 <li class="nav-item">
-                    <a href="login.php" class="nav-link active">Login</a>
+                    <a href="student_main.php" class="nav-link">Homepage</a>
                 </li>
                 <li class="nav-item">
-                    <a href="index.html" class="nav-link">Homepage</a>
-                </li>
-                <li class="nav-item">
-                    <a href="register.php" class="nav-link">Register</a>
+                    <a href="logout.php" class="nav-link">Logout</a>
                 </li>
                   <!-- Only show logout if the user is logged in -->
             <?php if (isset($_SESSION['user_id'])): ?>
@@ -65,7 +62,8 @@
 
 
     <div class="center-container">
-        <a href="student_choice.php" class="button"> Choice of courses</a>
+        <a href="student_choice.php" class="button">All Courses</a>
+        <a href="display_course.php" class="button">My Courses</a>
         <a href="calendar.php" class="button">Calendar</a>
     </div>
 </body>
