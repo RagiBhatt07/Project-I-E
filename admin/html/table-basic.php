@@ -190,6 +190,7 @@
                                                 <th class="border-top-0">Course Name</th>
                                                 <th class="border-top-0">Time</th>
                                                 <th class="border-top-0">End Time</th>
+                                                <th class="border-top-0">Day</th>
                                                 <th class="border-top-0">Room</th>
                                                 <th class="border-top-0">Professor</th>
                                                 <th class="border-top-0">Edit</th>
@@ -204,6 +205,7 @@
                                                 <td><?php echo htmlspecialchars($course['c_name']); ?></td>
                                                 <td><?php echo htmlspecialchars($course['c_time']); ?></td>
                                                 <td><?php echo htmlspecialchars($course['c_endtime']); ?></td>
+                                                <td><?php echo htmlspecialchars($course['c_day']); ?></td>
                                                 <td><?php echo htmlspecialchars($course['c_room']); ?></td>
                                                 <td><?php echo htmlspecialchars($course['c_prof']); ?></td>
                                                 <td>

@@ -5,18 +5,19 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Admin Dashboard</title>
     <link rel="canonical" href="https://www.wrappixel.com/templates/materialpro-lite/" />
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
+    <!-- chartist CSS -->
+    <link href="../assets/plugins/chartist-js/dist/chartist.min.css" rel="stylesheet">
+    <link href="../assets/plugins/chartist-js/dist/chartist-init.css" rel="stylesheet">
+    <link href="../assets/plugins/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.css" rel="stylesheet">
+    <!--This page css - Morris CSS -->
+    <link href="../assets/plugins/c3-master/c3.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="css/style.min.css" rel="stylesheet">
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
 </head>
 
 <body>
@@ -32,13 +33,24 @@
     <!-- ============================================================== -->
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
-    <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full"
+    <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
         data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
         <!-- ============================================================== -->
         <!-- Topbar header - style you can find in pages.scss -->
         <!-- ============================================================== -->
         <header class="topbar" data-navbarbg="skin6">
             <nav class="navbar top-navbar navbar-expand-md navbar-dark">
+                <div class="navbar-header" data-logobg="skin6">
+                    
+                    <!-- ============================================================== -->
+                    <!-- toggle and nav items -->
+                    <!-- ============================================================== -->
+                    <a class="nav-toggler waves-effect waves-light text-white d-block d-md-none"
+                        href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End Logo -->
+                <!-- ============================================================== -->
                 <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
                     <ul class="navbar-nav d-lg-none d-md-block ">
                         <li class="nav-item">
@@ -49,6 +61,8 @@
                     <!-- ============================================================== -->
                     <!-- toggle and nav items -->
                     <!-- ============================================================== -->
+                
+
                     <!-- ============================================================== -->
                     <!-- Right side toggle and nav items -->
                     <!-- ============================================================== -->
@@ -58,7 +72,7 @@
                         <!-- ============================================================== -->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="../assets/images/users/1.jpg" alt="user" class="profile-pic me-2">Hello Admin
+                                <img src="../assets/images/users/1.jpg" alt="user" class="profile-pic me-2">Hello, Admin!
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown"></ul>
                         </li>
@@ -83,19 +97,20 @@
                                 href="index.html" aria-expanded="false"><i class="mdi me-2 mdi-gauge"></i><span
                                     class="hide-menu">Dashboard</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="pages-profile.html" aria-expanded="false">
+                                href="subject.php" aria-expanded="false">
                                 <i class="mdi me-2 mdi-account-check"></i><span class="hide-menu">Add Subjects</span></a>
                         </li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="table-basic.html" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
+                                href="table-basic.php" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
                                     class="hide-menu">View Subjects</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="icon-material.html" aria-expanded="false"><i
+                                href="student-table.php" aria-expanded="false"><i
                                     class="mdi me-2 mdi-emoticon"></i><span class="hide-menu">Student Data</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="map-google.html" aria-expanded="false"><i class="mdi me-2 mdi-earth"></i><span
+                                href="notify-page.php" aria-expanded="false"><i class="mdi me-2 mdi-earth"></i><span
                                     class="hide-menu">Notifications</span></a></li>
                     </ul>
+
                 </nav>
                 <!-- End Sidebar navigation -->
             </div>
@@ -104,7 +119,7 @@
                 <div class="row">
                     <div class="col-4 link-wrap">
                         <!-- item-->
-                        <a href="" class="link" data-toggle="tooltip" title="" data-original-title="Logout"><i
+                        <a href="admin-logout.php" class="link" data-toggle="tooltip" title="" data-original-title="Logout"><i
                                 class="mdi mdi-power"></i></a>
                     </div>
                 </div>
@@ -148,86 +163,68 @@
                 <!-- Row -->
                 <div class="row">
                     <!-- Column -->
-                    <div class="col-lg-4 col-xlg-3 col-md-5">
-                        <div class="card">
-                            <div class="card-body profile-card">
-                                <center class="mt-4"> <img src="../assets/images/users/5.jpg"
-                                        class="rounded-circle" width="150" />
-                                    <h4 class="card-title mt-2">Hanna Gover</h4>
-                                    <h6 class="card-subtitle">Accoubts Manager Amix corp</h6>
-                                    <div class="row text-center justify-content-center">
-                                        <div class="col-4">
-                                            <a href="javascript:void(0)" class="link">
-                                                <i class="icon-people" aria-hidden="true"></i>
-                                                <span class="value-digit">254</span>
-                                            </a></div>
-                                        <div class="col-4">
-                                            <a href="javascript:void(0)" class="link">
-                                                <i class="icon-picture" aria-hidden="true"></i>
-                                                <span class="value-digit">54</span>
-                                            </a></div>
-                                    </div>
-                                </center>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Column -->
-                    <!-- Column -->
                     <div class="col-lg-8 col-xlg-9 col-md-7">
                         <div class="card">
                             <div class="card-body">
-                                <form class="form-horizontal form-material mx-2">
+                                <form class="form-horizontal form-material mx-2" action = "add_course.php" method = "post">
                                     <div class="form-group">
-                                        <label class="col-md-12 mb-0">Full Name</label>
+                                        <label class="col-md-12 mb-0">Course ID</label>
                                         <div class="col-md-12">
-                                            <input type="text" placeholder="Johnathan Doe"
+                                            <input type="text" class="form-control ps-0 form-control-line" name="c_id"> </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-12 mb-0">Course Name</label>
+                                        <div class="col-md-12">
+                                            <input type="text" name = "c_name"
+                                                class="form-control ps-0 form-control-line">
+                                        </div>
+                                    </div>
+                              
+                                    <div class="form-group">
+                                        <label class="col-md-12 mb-0">Course Room</label>
+                                        <div class="col-md-12">
+                                            <input type="text" name="c_room"
                                                 class="form-control ps-0 form-control-line">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="example-email" class="col-md-12">Email</label>
+                                        <label class="col-md-12">Course Time</label>
                                         <div class="col-md-12">
-                                            <input type="email" placeholder="johnathan@admin.com"
-                                                class="form-control ps-0 form-control-line" name="example-email"
+                                            <input type="text" name = "c_time"
+                                                class="form-control ps-0 form-control-line"
                                                 id="example-email">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-md-12 mb-0">Password</label>
+                                        <label class="col-md-12">Course EndTime</label>
                                         <div class="col-md-12">
-                                            <input type="password" value="password"
+                                            <input type="text" name = "c_endtime"
+                                                class="form-control ps-0 form-control-line"
+                                                id="example-email">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-12 mb-0">Course Professor</label>
+                                        <div class="col-md-12">
+                                            <input type="text" name="c_prof"
                                                 class="form-control ps-0 form-control-line">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-md-12 mb-0">Phone No</label>
-                                        <div class="col-md-12">
-                                            <input type="text" placeholder="123 456 7890"
-                                                class="form-control ps-0 form-control-line">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-md-12 mb-0">Message</label>
-                                        <div class="col-md-12">
-                                            <textarea rows="5" class="form-control ps-0 form-control-line"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-12">Select Country</label>
+                                        <label class="col-sm-12">Select Day</label>
                                         <div class="col-sm-12 border-bottom">
-                                            <select class="form-select shadow-none ps-0 border-0 form-control-line">
-                                                <option>London</option>
-                                                <option>India</option>
-                                                <option>Usa</option>
-                                                <option>Canada</option>
-                                                <option>Thailand</option>
+                                            <select class="form-select shadow-none ps-0 border-0 form-control-line" name="c_day">
+                                                <option>Monday</option>
+                                                <option>Tuesday</option>
+                                                <option>Wednesday</option>
+                                                <option>Thursday</option>
+                                                <option>Friday</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="col-sm-12 d-flex">
-                                            <button class="btn btn-success mx-auto mx-md-0 text-white">Update
-                                                Profile</button>
+                                            <button class="btn btn-success mx-auto mx-md-0 text-white">Add Course</button>
                                         </div>
                                     </div>
                                 </form>
