@@ -105,7 +105,7 @@
                                 href="table-basic.php" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
                                     class="hide-menu">View Subjects</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="icon-material.html" aria-expanded="false"><i
+                                href="student-table.php" aria-expanded="false"><i
                                     class="mdi me-2 mdi-emoticon"></i><span class="hide-menu">Student Data</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="notify-page.php" aria-expanded="false"><i class="mdi me-2 mdi-earth"></i><span
@@ -116,20 +116,10 @@
                 <!-- End Sidebar navigation -->
             <!-- End Sidebar scroll-->
             <div class="sidebar-footer">
-                <div class="row">
+               
                     <div class="col-4 link-wrap">
                         <!-- item-->
-                        <a href="" class="link" data-toggle="tooltip" title="" data-original-title="Settings"><i
-                                class="ti-settings"></i></a>
-                    </div>
-                    <div class="col-4 link-wrap">
-                        <!-- item-->
-                        <a href="" class="link" data-toggle="tooltip" title="" data-original-title="Email"><i
-                                class="mdi mdi-gmail"></i></a>
-                    </div>
-                    <div class="col-4 link-wrap">
-                        <!-- item-->
-                        <a href="" class="link" data-toggle="tooltip" title="" data-original-title="Logout"><i
+                        <a href="logout.php" class="link" data-toggle="tooltip" title="" data-original-title="Logout"><i
                                 class="mdi mdi-power"></i></a>
                     </div>
                 </div>
@@ -147,13 +137,13 @@
             <!-- ============================================================== -->
             <div class="page-breadcrumb">
                 <div class="row align-items-center">
-                    <div class="col-md-6 col-12 align-self-center">
-                        <h3 class="page-title mb-0 p-0">Students' Data</h3>
+                    <div class="col-md-6 col-8 align-self-center">
+                        <h3 class="page-title mb-0 p-0">Google map</h3>
                         <div class="d-flex align-items-center">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Students' Data</li>
+                                    <li class="breadcrumb-item active" aria-current="page">Edit Courses here</li>
                                 </ol>
                             </nav>
                         </div>
@@ -166,89 +156,101 @@
             <!-- ============================================================== -->
             <!-- Container fluid  -->
             <!-- ============================================================== -->
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   <?php
-            include 'db_conn.php';  // Make sure this path is correct
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <?php
+                include 'db_conn.php';  // Make sure this path is correct
 
-            try {
-                // Prepare and execute SQL statement
-                $stmt = $pdo->prepare("SELECT * FROM register");
-                $stmt->execute();
+                try {
+                    // Prepare and execute SQL statement
+                    $stmt = $pdo->prepare("SELECT * FROM courses");
+                    $stmt->execute();
 
-                // Fetch all the rows
-                $courses = $stmt->fetchAll();
-            } catch (PDOException $e) {
-                // Handle any errors
-                die("Could not fetch courses: " . $e->getMessage());
-            }
-        ?>
-        <!-- ============================================================== -->
-        <!-- Container fluid  -->
-        <!-- ============================================================== -->
-        <div class="container-fluid">
+                    // Fetch all the rows
+                    $courses = $stmt->fetchAll();
+                } catch (PDOException $e) {
+                    // Handle any errors
+                    die("Could not fetch courses: " . $e->getMessage());
+                }
+            ?>
             <!-- ============================================================== -->
-            <!-- Start Page Content -->
+            <!-- Container fluid  -->
             <!-- ============================================================== -->
-            <div class="row">
-                <!-- column -->
-                <div class="col-sm-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title">View All Students here</h4>
-                            <div class="table-responsive">
-                                <table class="table user-table">
-                                    <thead>
-                                        <tr>
-                                            <th class="border-top-0">#</th>
-                                            <th class="border-top-0">Name</th>
-                                            <th class="border-top-0">Lastname</th>
-                                            <th class="border-top-0">Year</th>
-                                            <th class="border-top-0">Email</th>
-                                            <th class="border-top-0">Phone</th>
-
-                                        </tr>
-                                    </thead>
-                                    <tbody id="studentTableBody">
-                                    <?php if (is_array($courses) && !empty($courses)): ?>
-                                    <?php foreach ($courses as $course): ?>
-                                        <tr>
-                                            <td><?php echo htmlspecialchars($course['s_id']); ?></td>
-                                            <td><?php echo htmlspecialchars($course['s_firstname']); ?></td>
-                                            <td><?php echo htmlspecialchars($course['s_lastname']); ?></td>
-                                            <td><?php echo htmlspecialchars($course['s_year']); ?></td>
-                                            <td><?php echo htmlspecialchars($course['s_email']); ?></td>
-                                            <td><?php echo htmlspecialchars($course['s_phone']); ?></td>
-                                        </tr>
-                                        <?php endforeach; ?>
-                                        
-                                        <?php else: ?>
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <!-- column -->
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">View All Courses here</h4>
+                                <div class="table-responsive">
+                                    <table class="table user-table">
+                                        <thead>
                                             <tr>
-                                                <td colspan="6">No student found</td>
+                                                <th class="border-top-0">#</th>
+                                                <th class="border-top-0">Course Name</th>
+                                                <th class="border-top-0">Time</th>
+                                                <th class="border-top-0">End Time</th>
+                                                <th class="border-top-0">Room</th>
+                                                <th class="border-top-0">Professor</th>
+                                                <th class="border-top-0">Edit</th>
+                                                <th class="border-top-0">Remove</th>
                                             </tr>
-                                        <?php endif; ?>
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody id="courseTableBody">
+                                        <?php if (is_array($courses) && !empty($courses)): ?>
+                                        <?php foreach ($courses as $course): ?>
+                                            <tr>
+                                                <td><?php echo htmlspecialchars($course['c_id']); ?></td>
+                                                <td><?php echo htmlspecialchars($course['c_name']); ?></td>
+                                                <td><?php echo htmlspecialchars($course['c_time']); ?></td>
+                                                <td><?php echo htmlspecialchars($course['c_endtime']); ?></td>
+                                                <td><?php echo htmlspecialchars($course['c_room']); ?></td>
+                                                <td><?php echo htmlspecialchars($course['c_prof']); ?></td>
+                                                <td>
+                                                    <a href="edit_course.php?c_id=<?php echo $course['c_id']; ?>" class="btn btn-primary">Edit</a>
+                                                </td>
+                                                <td>
+                                                    <a href="notify_course.php?c_id=<?php echo $course['c_id']; ?>" class="btn btn-primary">Notify</a>
+                                                </td>
+                                            </tr>
+                                            <?php endforeach; ?>
+                                            
+                                            <?php else: ?>
+                                                <tr>
+                                                    <td colspan="6">No courses found</td>
+                                                </tr>
+                                            <?php endif; ?>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <!-- ============================================================== -->
+                <!-- End PAge Content -->
+                <!-- ============================================================== -->
+                <!-- ============================================================== -->
+                <!-- Right sidebar -->
+                <!-- ============================================================== -->
+                <!-- .right-sidebar -->
+                <!-- ============================================================== -->
+                <!-- End Right sidebar -->
+                <!-- ============================================================== -->
             </div>
-        </div>
-
-
-        <footer class="footer"> A Project by I and E </a>
+            <!-- ============================================================== -->
+            <!-- End Container fluid  -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- footer -->
+            <!-- ============================================================== -->
+            <footer class="footer"> A project by I And E </a>
             </footer>
             <!-- ============================================================== -->
             <!-- End footer -->
@@ -272,6 +274,10 @@
     <script src="js/waves.js"></script>
     <!--Menu sidebar -->
     <script src="js/sidebarmenu.js"></script>
+    <!-- google maps api -->
+    <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
+    <script src="../assets/plugins/gmaps/gmaps.min.js"></script>
+    <script src="../assets/plugins/gmaps/jquery.gmaps.js"></script>
     <!--Custom JavaScript -->
     <script src="js/custom.js"></script>
 </body>

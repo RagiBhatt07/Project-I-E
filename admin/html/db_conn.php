@@ -3,7 +3,7 @@
 $host = 'localhost';
 $db   = 'calendar';
 $user = 'root';
-$pass = 'root';
+$pass = '';
 $charset = 'utf8mb4';
 
 // Set up DSN (Data Source Name)
