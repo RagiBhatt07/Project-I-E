@@ -1,0 +1,119 @@
+:root {
+    --numDays: 5;
+    --numHours: 10;
+    --timeHeight: 60px;
+    --calBgColor: #fff1f8;
+    --eventBorderColor: #f2d3d8;
+    --eventColor1: #ffd6d1;
+    --eventColor2: #fafaa3;
+    --eventColor3: #e2f8ff;
+    --eventColor4: #d1ffe6;
+    --formBgColor: #ffffff; /* Background color for forms */
+    --inputBgColor: #f7f7f7; /* Background color for inputs */
+    --inputBorderColor: #dcdcdc; /* Border color for inputs */
+    --buttonBgColor: #e2f8ff; /* Background color for buttons */
+    --buttonHoverColor: #cbf2ff; /* Hover color for buttons */
+    --buttonTextColor: #333333; /* Text color for buttons */
+    --navBgColor: #d1ffe6; /* Background color for navigation */
+    --navTextColor: #333333; /* Text color for navigation */
+    --navActiveColor: #f2d3d8; /* Active color for navigation links */
+  }
+  
+  /* Existing styles for calendar... */
+  
+  /* Styles for navigation bar */
+  .navbar {
+    background-color: var(--navBgColor);
+    padding: 1rem;
+    text-align: center;
+  }
+  
+  .nav-item {
+    display: inline-block;
+    margin-right: 1rem;
+  }
+  
+  .nav-link {
+    text-decoration: none;
+    color: var(--navTextColor);
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+  }
+  
+  .nav-link:hover,
+  .nav-link.active {
+    background-color: var(--navActiveColor);
+  }
+  
+  /* Styles for form elements */
+  form {
+    background: var(--formBgColor);
+    max-width: 300px;
+    margin: 2rem auto;
+    padding: 2rem;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+  
+  input[type="text"],
+  input[type="password"],
+  input[type="email"],
+  select {
+    width: 100%;
+    padding: var(--inputPadding);
+    margin-bottom: var(--inputMarginBottom);
+    background: var(--inputBgColor);
+    border: 1px solid var(--inputBorderColor);
+    border-radius: var(--inputBorderRadius);
+    color: var(--inputTextColor);
+    font-size: 1rem; /* Adjust the font size as needed */
+  }
+  
+/* Additional styles for button */
+button {
+  width: 100%;
+  padding: var(--inputPadding);
+  margin-bottom: var(--inputMarginBottom);
+  border: none;
+  border-radius: var(--inputBorderRadius);
+  background-color: #4CAF50; /* Adjust button color as needed */
+  color: white;
+  cursor: pointer;
+  font-size: 1rem; /* Adjust the font size as needed */
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #45a049; /* Darker shade for hover effect */
+}
+
+/* Additional styles to enhance the look & feel of the form */
+form {
+  max-width: 400px; /* Adjust the width as needed */
+  margin: 2rem auto; /* Centers the form with margin */
+  padding: 2rem; /* Adds padding inside the form */
+  background: #f9f9f9; /* Light background for the form */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow around the form */
+  border-radius: var(--inputBorderRadius);
+}
+
+/* Style the placeholders to match your design */
+::placeholder {
+  color: #a8a8a8;
+}
+
+/* Ensure the label styles match your design */
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--inputTextColor);
+  font-weight: 600;
+}
+
+/* If you have a heading inside your form */
+h2 {
+  text-align: center;
+  color: #333;
+}
