@@ -30,6 +30,57 @@
         .button:hover {
             background-color: #2d762f;
         }
+         /* Style for table */
+         table.table-bordered {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        table.table-bordered th,
+        table.table-bordered td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        table.table-bordered th {
+            background-color: #f2f2f2;
+        }
+
+        table.table-striped tbody tr:nth-child(odd) {
+            background-color: #f5f5f5;
+        }
+        <style>
+        .center-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .button {
+            width: 150px;
+            text-align: center;
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 20px;
+            background-color: #4CAF50;;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .button:hover {
+            background-color: #2d762f;
+        }
+
+        /* Optional: Style for action buttons */
+        /* Add your own styles for action buttons here if needed */
+        td.actions {
+            text-align: center;
+        }
     </style>
 </head>
 
@@ -99,7 +150,7 @@ if (isset($_SESSION['user_id'])) {
                             <div class="card-body">
                                 <h4 class="card-title">Courses you take:</h4>
                                 <div class="table-responsive">
-                                    <table class="table user-table">
+                                    <table class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
                                                 <th class="border-top-0">#</th>
@@ -107,6 +158,7 @@ if (isset($_SESSION['user_id'])) {
                                                 <th class="border-top-0">Time</th>
                                                 <th class="border-top-0">End Time</th>
                                                 <th class="border-top-0">Room</th>
+                                                <th class="border-top-0">Day</th>
                                                 <th class="border-top-0">Professor</th>
                                                 <th class="border-top-0">Remove</th>
                                             </tr>
@@ -120,9 +172,10 @@ if (isset($_SESSION['user_id'])) {
                                                 <td><?php echo htmlspecialchars($course['c_time']); ?></td>
                                                 <td><?php echo htmlspecialchars($course['c_endtime']); ?></td>
                                                 <td><?php echo htmlspecialchars($course['c_room']); ?></td>
+                                                <td><?php echo htmlspecialchars($course['c_day']); ?></td>
                                                 <td><?php echo htmlspecialchars($course['c_prof']); ?></td>
                                                 <td>
-                                                    <a href="remove-course.php?c_id=<?php echo $course['c_id']; ?>" class="btn btn-primary" onclick="return confirm('Are you sure you want to remove this course?');">Remove</a>
+                                                    <a href="remove_course_student.php?c_id=<?php echo $course['c_id']; ?>" class="btn btn-primary" onclick="return confirm('Are you sure you want to remove this course?');">Remove</a>
                                                 </td>
                                             </tr>
                                             <?php endforeach; ?>

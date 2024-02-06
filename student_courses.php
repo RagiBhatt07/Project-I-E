@@ -67,7 +67,7 @@
         <div class="nav-container">
             <ul class="nav-menu">
                 <li class="nav-item">
-                    <a href="index.html" class="nav-link">Homepage</a>
+                    <a href="student_main.php" class="nav-link">Homepage</a>
                 </li>
                   <!-- Only show logout if the user is logged in -->
             <?php if (isset($_SESSION['user_id'])): ?>

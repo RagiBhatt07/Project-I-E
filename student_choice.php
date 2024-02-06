@@ -27,6 +27,31 @@
         table.table-striped tbody tr:nth-child(odd) {
             background-color: #f5f5f5;
         }
+        <style>
+        .center-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .button {
+            width: 150px;
+            text-align: center;
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 20px;
+            background-color: #4CAF50;;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .button:hover {
+            background-color: #2d762f;
+        }
 
         /* Optional: Style for action buttons */
         /* Add your own styles for action buttons here if needed */
@@ -34,6 +59,9 @@
             text-align: center;
         }
     </style>
+
+        
+
 </head>
 
 <body>
@@ -76,6 +104,8 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">View All Courses here</h4>
+                        
+                        <form action="enroll_course.php" method="post">
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped">
                                 <thead>
@@ -109,7 +139,10 @@
                                     <?php endif; ?>
                                 </tbody>
                             </table>
+
+                            <input type="submit" class="button" value="Enroll">
                         </div>
+
                     </div>
                 </div>
             </div>

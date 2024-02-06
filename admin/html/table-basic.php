@@ -98,7 +98,7 @@
                                 href="index.html" aria-expanded="false"><i class="mdi me-2 mdi-gauge"></i><span
                                     class="hide-menu">Dashboard</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="pages-profile.html" aria-expanded="false">
+                                href="subject.php" aria-expanded="false">
                                 <i class="mdi me-2 mdi-account-check"></i><span class="hide-menu">Add Subjects</span></a>
                         </li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
@@ -168,6 +168,13 @@
                     // Handle any errors
                     die("Could not fetch courses: " . $e->getMessage());
                 }
+
+                // Check for success message and display it
+                if (isset($_SESSION['update_success'])) {
+                    echo "<div class='success-message'>" . $_SESSION['update_success'] . "</div>";
+                    unset($_SESSION['update_success']); // Clear the message so it doesn't show again
+                }
+
             ?>
             <!-- ============================================================== -->
             <!-- Container fluid  -->

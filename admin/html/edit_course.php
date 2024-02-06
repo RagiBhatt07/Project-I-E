@@ -17,17 +17,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['c_id'])) {
     $c_prof = $_POST['c_prof'];
     $c_day = isset($_POST['c_day']) ? $_POST['c_day'] : '';  // Default to an empty string if not set
 
-
     // Update the course in the database
     try {
         $stmt = $pdo->prepare("UPDATE courses SET c_name = ?, c_time = ?, c_endtime = ?, c_room = ?, c_prof = ?, c_day = ? WHERE c_id = ?");
-        $stmt->execute([$c_id, $c_name, $c_time, $c_endtime, $c_room, $c_prof, $c_day]);
+        $stmt->execute([$c_name, $c_time, $c_endtime, $c_room, $c_prof, $c_day, $c_id]);
 
-        // If you want to add Twilio notification after updating, you can call it here
-        // send_twilio_notification($c_id);
+        // Set a success message in session
+        $_SESSION['update_success'] = "Course updated successfully.";
 
-        // Redirect to the course listing page or display success message
-        header('Location: subject.php');
+        // Redirect to the course listing page
+        header('Location: table-basic.php');
         exit;
     } catch (PDOException $e) {
         $errorMsg = "Error updating course: " . $e->getMessage();
@@ -45,7 +44,7 @@ if (isset($_GET['c_id'])) {
 
         // If no course is found, redirect back to the course listing or show an error
         if (!$course) {
-            header('Location: subject.php');
+            header('Location: table-basic.php');
             exit;
         }
     } catch (PDOException $e) {
@@ -84,9 +83,8 @@ if (isset($_GET['c_id'])) {
         <p><?php echo $errorMsg; ?></p>
     <?php endif; ?>
 
-    <!-- Display the form for editing a course -->
     <?php if (isset($course)): ?>
-        <form action="update_course.php" method="post">
+        <form class="form-horizontal form-material mx-2" action="" method="post">
             <input type="hidden" name="c_id" value="<?php echo htmlspecialchars($course['c_id']); ?>">
             <label for="c_name">Course Name:</label>
             <input type="text" name="c_name" value="<?php echo htmlspecialchars($course['c_name']); ?>">
@@ -96,17 +94,18 @@ if (isset($_GET['c_id'])) {
             <input type="text" name="c_room" value="<?php echo htmlspecialchars($course['c_room']); ?>">
             <input type="text" name="c_prof" value="<?php echo htmlspecialchars($course['c_prof']); ?>">
             <div class="form-group">
-                                        <label class="col-sm-12">Select Day</label>
-                                        <div class="col-sm-12 border-bottom">
-                                            <select class="form-select shadow-none ps-0 border-0 form-control-line" name="c_day">
-                                                <option>Monday</option>
-                                                <option>Tuesday</option>
-                                                <option>Wednesday</option>
-                                                <option>Thursday</option>
-                                                <option>Friday</option>
-                                            </select>
-                                        </div>
-                                    </div>
+            <label class="col-sm-12">Select Day</label>
+            <div class="col-sm-12 border-bottom">
+                <select class="form-select shadow-none ps-0 border-0 form-control-line" name="c_day">
+                    <option value="Monday" <?php echo ($course['c_day'] == 'Monday') ? 'selected' : ''; ?>>Monday</option>
+                    <option value="Tuesday" <?php echo ($course['c_day'] == 'Tuesday') ? 'selected' : ''; ?>>Tuesday</option>
+                    <option value="Wednesday" <?php echo ($course['c_day'] == 'Wednesday') ? 'selected' : ''; ?>>Wednesday</option>
+                    <option value="Thursday" <?php echo ($course['c_day'] == 'Thursday') ? 'selected' : ''; ?>>Thursday</option>
+                    <option value="Friday" <?php echo ($course['c_day'] == 'Friday') ? 'selected' : ''; ?>>Friday</option>
+                </select>
+            </div>
+        </div>
+
             
             <input type="submit" value="Update Course">
         </form>

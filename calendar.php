@@ -98,7 +98,7 @@
               <a href="logout.php" class="nav-link">Logout</a>
           </li>
           <li class="nav-item">
-              <a href="subjects.php" class="nav-link">Subjects</a>
+              <a href="student_main.php" class="nav-link">Homepage</a>
           </li>
       </ul>
   </div>
