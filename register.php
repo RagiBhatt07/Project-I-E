@@ -20,7 +20,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $s_firstname = $_POST['s_firstname'];
     $s_year = $_POST['s_year'];
     $s_email = $_POST['s_email'];
-    $s_password = $_POST['s_password']; // You should hash passwords before storing
+    $s_password = $_POST['s_password'];
+    $s_phone = $_POST['s_phone']; // You should hash passwords before storing
 
     // Check for valid email
     if (!filter_var($s_email, FILTER_VALIDATE_EMAIL)) {
@@ -40,9 +41,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             } else {
                 // Email is also unique, proceed to insert new record
                 $hashed_password = password_hash($s_password, PASSWORD_DEFAULT);
-                $sql = "INSERT INTO register (s_id, s_lastname, s_firstname, s_year, s_email, s_password) VALUES (?, ?, ?, ?, ?, ?)";
+                $sql = "INSERT INTO register (s_id, s_lastname, s_firstname, s_year, s_email, s_password, s_phone) VALUES (?, ?, ?, ?, ?, ?, ?)";
                 $stmt = $pdo->prepare($sql);
-                if ($stmt->execute([$s_id, $s_lastname, $s_firstname, $s_year, $s_email, $hashed_password])) {
+                if ($stmt->execute([$s_id, $s_lastname, $s_firstname, $s_year, $s_email, $hashed_password, $s_phone])) {
                     echo "Registration successful!";
                 } else {
                     echo "Error: " . $stmt->errorInfo()[2];
@@ -88,6 +89,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         <input type="email" name="s_email" placeholder="Email" required>
         <input type="password" name="s_password" placeholder="Password" required>
+        <input type="phone" name="s_phone" placeholder="Phone" required>
         <button type="submit" style="background-color: #4CAF50; color: white; padding: 14px 20px; margin: 8px 0; border: none; cursor: pointer;">Register</button>
     </div>
 </form>

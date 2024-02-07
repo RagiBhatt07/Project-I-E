@@ -207,6 +207,13 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
+                                        <label class="col-md-12">Course Date</label>
+                                        <div class="col-md-12">
+                                            <input type="date" name = "c_date"
+                                                class="form-control ps-0 form-control-line">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
                                         <label class="col-md-12 mb-0">Course Professor</label>
                                         <div class="col-md-12">
                                             <input type="text" name="c_prof"
