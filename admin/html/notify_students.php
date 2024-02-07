@@ -35,9 +35,9 @@ function notify_students($pdo, $courseID, $twilio_sid, $twilio_token, $twilio_fr
 }
 
 // Twilio credentials
-$twilio_sid = getenv('TWILIO_ACCOUNT_SID');
-$twilio_token = getenv('TWILIO_AUTH_TOKEN');
-$twilio_from_number = '+13203342200';
+$twilio_sid = "AC08341bb99d4cbaf7393fd593f91fc005";
+$twilio_token = "f5ee0f659fedb9bf24219d6c9af44a4e";
+$twilio_from_number = '+13133491003';
 
 // Check if course_id is set in the URL
 if (isset($_GET['c_id'])) {
