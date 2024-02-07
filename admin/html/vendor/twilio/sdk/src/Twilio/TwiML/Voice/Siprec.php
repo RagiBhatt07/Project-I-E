@@ -17,7 +17,7 @@ class Siprec extends TwiML {
      *
      * @param array $attributes Optional attributes
      */
-    public function __construct($attributes = []) {
+    public function __construct($attributes = array()) {
         parent::__construct('Siprec', null, $attributes);
     }
 
@@ -27,7 +27,7 @@ class Siprec extends TwiML {
      * @param array $attributes Optional attributes
      * @return Parameter Child element.
      */
-    public function parameter($attributes = []): Parameter {
+    public function parameter($attributes = array()) {
         return $this->nest(new Parameter($attributes));
     }
 
@@ -35,8 +35,9 @@ class Siprec extends TwiML {
      * Add Name attribute.
      *
      * @param string $name Friendly name given to SIPREC
+     * @return static $this.
      */
-    public function setName($name): self {
+    public function setName($name) {
         return $this->setAttribute('name', $name);
     }
 
@@ -44,8 +45,9 @@ class Siprec extends TwiML {
      * Add ConnectorName attribute.
      *
      * @param string $connectorName Unique name for Connector
+     * @return static $this.
      */
-    public function setConnectorName($connectorName): self {
+    public function setConnectorName($connectorName) {
         return $this->setAttribute('connectorName', $connectorName);
     }
 
@@ -53,26 +55,9 @@ class Siprec extends TwiML {
      * Add Track attribute.
      *
      * @param string $track Track to be streamed to remote service
+     * @return static $this.
      */
-    public function setTrack($track): self {
+    public function setTrack($track) {
         return $this->setAttribute('track', $track);
-    }
-
-    /**
-     * Add StatusCallback attribute.
-     *
-     * @param string $statusCallback Status Callback URL
-     */
-    public function setStatusCallback($statusCallback): self {
-        return $this->setAttribute('statusCallback', $statusCallback);
-    }
-
-    /**
-     * Add StatusCallbackMethod attribute.
-     *
-     * @param string $statusCallbackMethod Status Callback URL method
-     */
-    public function setStatusCallbackMethod($statusCallbackMethod): self {
-        return $this->setAttribute('statusCallbackMethod', $statusCallbackMethod);
     }
 }

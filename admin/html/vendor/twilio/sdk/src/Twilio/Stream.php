@@ -12,7 +12,7 @@ class Stream implements \Iterator {
     public $pageLimit;
     public $currentPage;
 
-    public function __construct(Page $page, $limit, $pageLimit) {
+    function __construct(Page $page, $limit, $pageLimit) {
         $this->page = $page;
         $this->firstPage = $page;
         $this->limit = $limit;
@@ -27,7 +27,6 @@ class Stream implements \Iterator {
      * @link http://php.net/manual/en/iterator.current.php
      * @return mixed Can return any type.
      */
-    #[\ReturnTypeWillChange]
     public function current() {
         return $this->page->current();
     }
@@ -38,7 +37,7 @@ class Stream implements \Iterator {
      * @link http://php.net/manual/en/iterator.next.php
      * @return void Any returned value is ignored.
      */
-    public function next(): void {
+    public function next() {
         $this->page->next();
         $this->currentRecord++;
 
@@ -61,7 +60,6 @@ class Stream implements \Iterator {
      * @link http://php.net/manual/en/iterator.key.php
      * @return mixed scalar on success, or null on failure.
      */
-    #[\ReturnTypeWillChange]
     public function key() {
         return $this->currentRecord;
     }
@@ -70,10 +68,10 @@ class Stream implements \Iterator {
      * (PHP 5 &gt;= 5.0.0)<br/>
      * Checks if current position is valid
      * @link http://php.net/manual/en/iterator.valid.php
-     * @return bool The return value will be casted to boolean and then evaluated.
+     * @return boolean The return value will be casted to boolean and then evaluated.
      * Returns true on success or false on failure.
      */
-    public function valid(): bool {
+    public function valid() {
         return $this->page && $this->page->valid() && !$this->overLimit() && !$this->overPageLimit();
     }
 
@@ -83,20 +81,20 @@ class Stream implements \Iterator {
      * @link http://php.net/manual/en/iterator.rewind.php
      * @return void Any returned value is ignored.
      */
-    public function rewind(): void {
+    public function rewind() {
         $this->page = $this->firstPage;
         $this->page->rewind();
         $this->currentPage = 1;
         $this->currentRecord = 1;
     }
 
-    protected function overLimit(): bool {
+    protected function overLimit() {
         return ($this->limit !== null
             && $this->limit !== Values::NONE
             && $this->limit < $this->currentRecord);
     }
 
-    protected function overPageLimit(): bool {
+    protected function overPageLimit() {
         return ($this->pageLimit !== null
             && $this->pageLimit !== Values::NONE
             && $this->pageLimit < $this->currentPage);

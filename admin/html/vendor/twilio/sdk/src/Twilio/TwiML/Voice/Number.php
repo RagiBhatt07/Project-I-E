@@ -18,7 +18,7 @@ class Number extends TwiML {
      * @param string $phoneNumber Phone Number to dial
      * @param array $attributes Optional attributes
      */
-    public function __construct($phoneNumber, $attributes = []) {
+    public function __construct($phoneNumber, $attributes = array()) {
         parent::__construct('Number', $phoneNumber, $attributes);
     }
 
@@ -26,8 +26,9 @@ class Number extends TwiML {
      * Add SendDigits attribute.
      *
      * @param string $sendDigits DTMF tones to play when the call is answered
+     * @return static $this.
      */
-    public function setSendDigits($sendDigits): self {
+    public function setSendDigits($sendDigits) {
         return $this->setAttribute('sendDigits', $sendDigits);
     }
 
@@ -35,8 +36,9 @@ class Number extends TwiML {
      * Add Url attribute.
      *
      * @param string $url TwiML URL
+     * @return static $this.
      */
-    public function setUrl($url): self {
+    public function setUrl($url) {
         return $this->setAttribute('url', $url);
     }
 
@@ -44,17 +46,19 @@ class Number extends TwiML {
      * Add Method attribute.
      *
      * @param string $method TwiML URL method
+     * @return static $this.
      */
-    public function setMethod($method): self {
+    public function setMethod($method) {
         return $this->setAttribute('method', $method);
     }
 
     /**
      * Add StatusCallbackEvent attribute.
      *
-     * @param string[] $statusCallbackEvent Events to call status callback
+     * @param string $statusCallbackEvent Events to call status callback
+     * @return static $this.
      */
-    public function setStatusCallbackEvent($statusCallbackEvent): self {
+    public function setStatusCallbackEvent($statusCallbackEvent) {
         return $this->setAttribute('statusCallbackEvent', $statusCallbackEvent);
     }
 
@@ -62,8 +66,9 @@ class Number extends TwiML {
      * Add StatusCallback attribute.
      *
      * @param string $statusCallback Status callback URL
+     * @return static $this.
      */
-    public function setStatusCallback($statusCallback): self {
+    public function setStatusCallback($statusCallback) {
         return $this->setAttribute('statusCallback', $statusCallback);
     }
 
@@ -71,8 +76,9 @@ class Number extends TwiML {
      * Add StatusCallbackMethod attribute.
      *
      * @param string $statusCallbackMethod Status callback URL method
+     * @return static $this.
      */
-    public function setStatusCallbackMethod($statusCallbackMethod): self {
+    public function setStatusCallbackMethod($statusCallbackMethod) {
         return $this->setAttribute('statusCallbackMethod', $statusCallbackMethod);
     }
 
@@ -80,79 +86,9 @@ class Number extends TwiML {
      * Add Byoc attribute.
      *
      * @param string $byoc BYOC trunk SID (Beta)
+     * @return static $this.
      */
-    public function setByoc($byoc): self {
+    public function setByoc($byoc) {
         return $this->setAttribute('byoc', $byoc);
-    }
-
-    /**
-     * Add MachineDetection attribute.
-     *
-     * @param string $machineDetection Enable machine detection or end of greeting
-     *                                 detection
-     */
-    public function setMachineDetection($machineDetection): self {
-        return $this->setAttribute('machineDetection', $machineDetection);
-    }
-
-    /**
-     * Add AmdStatusCallbackMethod attribute.
-     *
-     * @param string $amdStatusCallbackMethod HTTP Method to use with
-     *                                        amd_status_callback
-     */
-    public function setAmdStatusCallbackMethod($amdStatusCallbackMethod): self {
-        return $this->setAttribute('amdStatusCallbackMethod', $amdStatusCallbackMethod);
-    }
-
-    /**
-     * Add AmdStatusCallback attribute.
-     *
-     * @param string $amdStatusCallback The URL we should call to send amd status
-     *                                  information to your application
-     */
-    public function setAmdStatusCallback($amdStatusCallback): self {
-        return $this->setAttribute('amdStatusCallback', $amdStatusCallback);
-    }
-
-    /**
-     * Add MachineDetectionTimeout attribute.
-     *
-     * @param int $machineDetectionTimeout Number of seconds to wait for machine
-     *                                     detection
-     */
-    public function setMachineDetectionTimeout($machineDetectionTimeout): self {
-        return $this->setAttribute('machineDetectionTimeout', $machineDetectionTimeout);
-    }
-
-    /**
-     * Add MachineDetectionSpeechThreshold attribute.
-     *
-     * @param int $machineDetectionSpeechThreshold Number of milliseconds for
-     *                                             measuring stick for the length
-     *                                             of the speech activity
-     */
-    public function setMachineDetectionSpeechThreshold($machineDetectionSpeechThreshold): self {
-        return $this->setAttribute('machineDetectionSpeechThreshold', $machineDetectionSpeechThreshold);
-    }
-
-    /**
-     * Add MachineDetectionSpeechEndThreshold attribute.
-     *
-     * @param int $machineDetectionSpeechEndThreshold Number of milliseconds of
-     *                                                silence after speech activity
-     */
-    public function setMachineDetectionSpeechEndThreshold($machineDetectionSpeechEndThreshold): self {
-        return $this->setAttribute('machineDetectionSpeechEndThreshold', $machineDetectionSpeechEndThreshold);
-    }
-
-    /**
-     * Add MachineDetectionSilenceTimeout attribute.
-     *
-     * @param int $machineDetectionSilenceTimeout Number of milliseconds of initial
-     *                                            silence
-     */
-    public function setMachineDetectionSilenceTimeout($machineDetectionSilenceTimeout): self {
-        return $this->setAttribute('machineDetectionSilenceTimeout', $machineDetectionSilenceTimeout);
     }
 }

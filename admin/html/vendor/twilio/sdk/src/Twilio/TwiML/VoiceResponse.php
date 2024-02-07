@@ -23,7 +23,7 @@ class VoiceResponse extends TwiML {
      * @param array $attributes Optional attributes
      * @return Voice\Connect Child element.
      */
-    public function connect($attributes = []): Voice\Connect {
+    public function connect($attributes = array()) {
         return $this->nest(new Voice\Connect($attributes));
     }
 
@@ -34,7 +34,7 @@ class VoiceResponse extends TwiML {
      * @param array $attributes Optional attributes
      * @return Voice\Dial Child element.
      */
-    public function dial($number = null, $attributes = []): Voice\Dial {
+    public function dial($number = null, $attributes = array()) {
         return $this->nest(new Voice\Dial($number, $attributes));
     }
 
@@ -43,7 +43,7 @@ class VoiceResponse extends TwiML {
      *
      * @return Voice\Echo_ Child element.
      */
-    public function echo_(): Voice\Echo_ {
+    public function echo_() {
         return $this->nest(new Voice\Echo_());
     }
 
@@ -54,7 +54,7 @@ class VoiceResponse extends TwiML {
      * @param array $attributes Optional attributes
      * @return Voice\Enqueue Child element.
      */
-    public function enqueue($name = null, $attributes = []): Voice\Enqueue {
+    public function enqueue($name = null, $attributes = array()) {
         return $this->nest(new Voice\Enqueue($name, $attributes));
     }
 
@@ -64,7 +64,7 @@ class VoiceResponse extends TwiML {
      * @param array $attributes Optional attributes
      * @return Voice\Gather Child element.
      */
-    public function gather($attributes = []): Voice\Gather {
+    public function gather($attributes = array()) {
         return $this->nest(new Voice\Gather($attributes));
     }
 
@@ -73,7 +73,7 @@ class VoiceResponse extends TwiML {
      *
      * @return Voice\Hangup Child element.
      */
-    public function hangup(): Voice\Hangup {
+    public function hangup() {
         return $this->nest(new Voice\Hangup());
     }
 
@@ -82,7 +82,7 @@ class VoiceResponse extends TwiML {
      *
      * @return Voice\Leave Child element.
      */
-    public function leave(): Voice\Leave {
+    public function leave() {
         return $this->nest(new Voice\Leave());
     }
 
@@ -92,7 +92,7 @@ class VoiceResponse extends TwiML {
      * @param array $attributes Optional attributes
      * @return Voice\Pause Child element.
      */
-    public function pause($attributes = []): Voice\Pause {
+    public function pause($attributes = array()) {
         return $this->nest(new Voice\Pause($attributes));
     }
 
@@ -103,7 +103,7 @@ class VoiceResponse extends TwiML {
      * @param array $attributes Optional attributes
      * @return Voice\Play Child element.
      */
-    public function play($url = null, $attributes = []): Voice\Play {
+    public function play($url = null, $attributes = array()) {
         return $this->nest(new Voice\Play($url, $attributes));
     }
 
@@ -114,7 +114,7 @@ class VoiceResponse extends TwiML {
      * @param array $attributes Optional attributes
      * @return Voice\Queue Child element.
      */
-    public function queue($name, $attributes = []): Voice\Queue {
+    public function queue($name, $attributes = array()) {
         return $this->nest(new Voice\Queue($name, $attributes));
     }
 
@@ -124,7 +124,7 @@ class VoiceResponse extends TwiML {
      * @param array $attributes Optional attributes
      * @return Voice\Record Child element.
      */
-    public function record($attributes = []): Voice\Record {
+    public function record($attributes = array()) {
         return $this->nest(new Voice\Record($attributes));
     }
 
@@ -135,7 +135,7 @@ class VoiceResponse extends TwiML {
      * @param array $attributes Optional attributes
      * @return Voice\Redirect Child element.
      */
-    public function redirect($url, $attributes = []): Voice\Redirect {
+    public function redirect($url, $attributes = array()) {
         return $this->nest(new Voice\Redirect($url, $attributes));
     }
 
@@ -145,7 +145,7 @@ class VoiceResponse extends TwiML {
      * @param array $attributes Optional attributes
      * @return Voice\Reject Child element.
      */
-    public function reject($attributes = []): Voice\Reject {
+    public function reject($attributes = array()) {
         return $this->nest(new Voice\Reject($attributes));
     }
 
@@ -156,7 +156,7 @@ class VoiceResponse extends TwiML {
      * @param array $attributes Optional attributes
      * @return Voice\Say Child element.
      */
-    public function say($message, $attributes = []): Voice\Say {
+    public function say($message, $attributes = array()) {
         return $this->nest(new Voice\Say($message, $attributes));
     }
 
@@ -167,7 +167,7 @@ class VoiceResponse extends TwiML {
      * @param array $attributes Optional attributes
      * @return Voice\Sms Child element.
      */
-    public function sms($message, $attributes = []): Voice\Sms {
+    public function sms($message, $attributes = array()) {
         return $this->nest(new Voice\Sms($message, $attributes));
     }
 
@@ -177,7 +177,7 @@ class VoiceResponse extends TwiML {
      * @param array $attributes Optional attributes
      * @return Voice\Pay Child element.
      */
-    public function pay($attributes = []): Voice\Pay {
+    public function pay($attributes = array()) {
         return $this->nest(new Voice\Pay($attributes));
     }
 
@@ -187,7 +187,7 @@ class VoiceResponse extends TwiML {
      * @param array $attributes Optional attributes
      * @return Voice\Prompt Child element.
      */
-    public function prompt($attributes = []): Voice\Prompt {
+    public function prompt($attributes = array()) {
         return $this->nest(new Voice\Prompt($attributes));
     }
 
@@ -197,7 +197,7 @@ class VoiceResponse extends TwiML {
      * @param array $attributes Optional attributes
      * @return Voice\Start Child element.
      */
-    public function start($attributes = []): Voice\Start {
+    public function start($attributes = array()) {
         return $this->nest(new Voice\Start($attributes));
     }
 
@@ -206,7 +206,7 @@ class VoiceResponse extends TwiML {
      *
      * @return Voice\Stop Child element.
      */
-    public function stop(): Voice\Stop {
+    public function stop() {
         return $this->nest(new Voice\Stop());
     }
 
@@ -216,7 +216,7 @@ class VoiceResponse extends TwiML {
      * @param array $attributes Optional attributes
      * @return Voice\Refer Child element.
      */
-    public function refer($attributes = []): Voice\Refer {
+    public function refer($attributes = array()) {
         return $this->nest(new Voice\Refer($attributes));
     }
 }

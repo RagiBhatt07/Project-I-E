@@ -24,7 +24,7 @@ class MessagingResponse extends TwiML {
      * @param array $attributes Optional attributes
      * @return Messaging\Message Child element.
      */
-    public function message($body, $attributes = []): Messaging\Message {
+    public function message($body, $attributes = array()) {
         return $this->nest(new Messaging\Message($body, $attributes));
     }
 
@@ -35,7 +35,7 @@ class MessagingResponse extends TwiML {
      * @param array $attributes Optional attributes
      * @return Messaging\Redirect Child element.
      */
-    public function redirect($url, $attributes = []): Messaging\Redirect {
+    public function redirect($url, $attributes = array()) {
         return $this->nest(new Messaging\Redirect($url, $attributes));
     }
 }

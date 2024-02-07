@@ -18,7 +18,7 @@ class Dial extends TwiML {
      * @param string $number Phone number to dial
      * @param array $attributes Optional attributes
      */
-    public function __construct($number = null, $attributes = []) {
+    public function __construct($number = null, $attributes = array()) {
         parent::__construct('Dial', $number, $attributes);
     }
 
@@ -29,7 +29,7 @@ class Dial extends TwiML {
      * @param array $attributes Optional attributes
      * @return Client Child element.
      */
-    public function client($identity = null, $attributes = []): Client {
+    public function client($identity = null, $attributes = array()) {
         return $this->nest(new Client($identity, $attributes));
     }
 
@@ -40,7 +40,7 @@ class Dial extends TwiML {
      * @param array $attributes Optional attributes
      * @return Conference Child element.
      */
-    public function conference($name, $attributes = []): Conference {
+    public function conference($name, $attributes = array()) {
         return $this->nest(new Conference($name, $attributes));
     }
 
@@ -51,7 +51,7 @@ class Dial extends TwiML {
      * @param array $attributes Optional attributes
      * @return Number Child element.
      */
-    public function number($phoneNumber, $attributes = []): Number {
+    public function number($phoneNumber, $attributes = array()) {
         return $this->nest(new Number($phoneNumber, $attributes));
     }
 
@@ -62,7 +62,7 @@ class Dial extends TwiML {
      * @param array $attributes Optional attributes
      * @return Queue Child element.
      */
-    public function queue($name, $attributes = []): Queue {
+    public function queue($name, $attributes = array()) {
         return $this->nest(new Queue($name, $attributes));
     }
 
@@ -72,7 +72,7 @@ class Dial extends TwiML {
      * @param string $simSid SIM SID
      * @return Sim Child element.
      */
-    public function sim($simSid): Sim {
+    public function sim($simSid) {
         return $this->nest(new Sim($simSid));
     }
 
@@ -83,27 +83,17 @@ class Dial extends TwiML {
      * @param array $attributes Optional attributes
      * @return Sip Child element.
      */
-    public function sip($sipUrl, $attributes = []): Sip {
+    public function sip($sipUrl, $attributes = array()) {
         return $this->nest(new Sip($sipUrl, $attributes));
-    }
-
-    /**
-     * Add Application child.
-     *
-     * @param string $applicationSid Application sid
-     * @param array $attributes Optional attributes
-     * @return Application Child element.
-     */
-    public function application($applicationSid = null, $attributes = []): Application {
-        return $this->nest(new Application($applicationSid, $attributes));
     }
 
     /**
      * Add Action attribute.
      *
      * @param string $action Action URL
+     * @return static $this.
      */
-    public function setAction($action): self {
+    public function setAction($action) {
         return $this->setAttribute('action', $action);
     }
 
@@ -111,8 +101,9 @@ class Dial extends TwiML {
      * Add Method attribute.
      *
      * @param string $method Action URL method
+     * @return static $this.
      */
-    public function setMethod($method): self {
+    public function setMethod($method) {
         return $this->setAttribute('method', $method);
     }
 
@@ -120,8 +111,9 @@ class Dial extends TwiML {
      * Add Timeout attribute.
      *
      * @param int $timeout Time to wait for answer
+     * @return static $this.
      */
-    public function setTimeout($timeout): self {
+    public function setTimeout($timeout) {
         return $this->setAttribute('timeout', $timeout);
     }
 
@@ -129,8 +121,9 @@ class Dial extends TwiML {
      * Add HangupOnStar attribute.
      *
      * @param bool $hangupOnStar Hangup call on star press
+     * @return static $this.
      */
-    public function setHangupOnStar($hangupOnStar): self {
+    public function setHangupOnStar($hangupOnStar) {
         return $this->setAttribute('hangupOnStar', $hangupOnStar);
     }
 
@@ -138,8 +131,9 @@ class Dial extends TwiML {
      * Add TimeLimit attribute.
      *
      * @param int $timeLimit Max time length
+     * @return static $this.
      */
-    public function setTimeLimit($timeLimit): self {
+    public function setTimeLimit($timeLimit) {
         return $this->setAttribute('timeLimit', $timeLimit);
     }
 
@@ -147,8 +141,9 @@ class Dial extends TwiML {
      * Add CallerId attribute.
      *
      * @param string $callerId Caller ID to display
+     * @return static $this.
      */
-    public function setCallerId($callerId): self {
+    public function setCallerId($callerId) {
         return $this->setAttribute('callerId', $callerId);
     }
 
@@ -156,8 +151,9 @@ class Dial extends TwiML {
      * Add Record attribute.
      *
      * @param string $record Record the call
+     * @return static $this.
      */
-    public function setRecord($record): self {
+    public function setRecord($record) {
         return $this->setAttribute('record', $record);
     }
 
@@ -165,8 +161,9 @@ class Dial extends TwiML {
      * Add Trim attribute.
      *
      * @param string $trim Trim the recording
+     * @return static $this.
      */
-    public function setTrim($trim): self {
+    public function setTrim($trim) {
         return $this->setAttribute('trim', $trim);
     }
 
@@ -174,8 +171,9 @@ class Dial extends TwiML {
      * Add RecordingStatusCallback attribute.
      *
      * @param string $recordingStatusCallback Recording status callback URL
+     * @return static $this.
      */
-    public function setRecordingStatusCallback($recordingStatusCallback): self {
+    public function setRecordingStatusCallback($recordingStatusCallback) {
         return $this->setAttribute('recordingStatusCallback', $recordingStatusCallback);
     }
 
@@ -184,18 +182,19 @@ class Dial extends TwiML {
      *
      * @param string $recordingStatusCallbackMethod Recording status callback URL
      *                                              method
+     * @return static $this.
      */
-    public function setRecordingStatusCallbackMethod($recordingStatusCallbackMethod): self {
+    public function setRecordingStatusCallbackMethod($recordingStatusCallbackMethod) {
         return $this->setAttribute('recordingStatusCallbackMethod', $recordingStatusCallbackMethod);
     }
 
     /**
      * Add RecordingStatusCallbackEvent attribute.
      *
-     * @param string[] $recordingStatusCallbackEvent Recording status callback
-     *                                               events
+     * @param string $recordingStatusCallbackEvent Recording status callback events
+     * @return static $this.
      */
-    public function setRecordingStatusCallbackEvent($recordingStatusCallbackEvent): self {
+    public function setRecordingStatusCallbackEvent($recordingStatusCallbackEvent) {
         return $this->setAttribute('recordingStatusCallbackEvent', $recordingStatusCallbackEvent);
     }
 
@@ -204,8 +203,9 @@ class Dial extends TwiML {
      *
      * @param bool $answerOnBridge Preserve the ringing behavior of the inbound
      *                             call until the Dialed call picks up
+     * @return static $this.
      */
-    public function setAnswerOnBridge($answerOnBridge): self {
+    public function setAnswerOnBridge($answerOnBridge) {
         return $this->setAttribute('answerOnBridge', $answerOnBridge);
     }
 
@@ -215,48 +215,9 @@ class Dial extends TwiML {
      * @param string $ringTone Ringtone allows you to override the ringback tone
      *                         that Twilio will play back to the caller while
      *                         executing the Dial
+     * @return static $this.
      */
-    public function setRingTone($ringTone): self {
+    public function setRingTone($ringTone) {
         return $this->setAttribute('ringTone', $ringTone);
-    }
-
-    /**
-     * Add RecordingTrack attribute.
-     *
-     * @param string $recordingTrack To indicate which audio track should be
-     *                               recorded
-     */
-    public function setRecordingTrack($recordingTrack): self {
-        return $this->setAttribute('recordingTrack', $recordingTrack);
-    }
-
-    /**
-     * Add Sequential attribute.
-     *
-     * @param bool $sequential Used to determine if child TwiML nouns should be
-     *                         dialed in order, one after the other (sequential) or
-     *                         dial all at once (parallel). Default is false,
-     *                         parallel
-     */
-    public function setSequential($sequential): self {
-        return $this->setAttribute('sequential', $sequential);
-    }
-
-    /**
-     * Add ReferUrl attribute.
-     *
-     * @param string $referUrl Webhook that will receive future SIP REFER requests
-     */
-    public function setReferUrl($referUrl): self {
-        return $this->setAttribute('referUrl', $referUrl);
-    }
-
-    /**
-     * Add ReferMethod attribute.
-     *
-     * @param string $referMethod The HTTP method to use for the refer Webhook
-     */
-    public function setReferMethod($referMethod): self {
-        return $this->setAttribute('referMethod', $referMethod);
     }
 }

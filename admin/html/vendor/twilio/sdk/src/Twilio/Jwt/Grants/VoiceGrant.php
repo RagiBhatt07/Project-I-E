@@ -15,20 +15,22 @@ class VoiceGrant implements Grant {
     /**
      * Returns whether incoming is allowed
      *
-     * @return bool whether incoming is allowed
+     * @return boolean whether incoming is allowed
      */
-    public function getIncomingAllow(): bool {
+    public function getIncomingAllow()
+    {
         return $this->incomingAllow;
     }
 
     /**
      * Set whether incoming is allowed
      *
-     * @param bool $incomingAllow whether incoming is allowed
+     * @param boolean $incomingAllow whether incoming is allowed
      *
      * @return $this updated grant
      */
-    public function setIncomingAllow(bool $incomingAllow): self {
+    public function setIncomingAllow($incomingAllow)
+    {
         $this->incomingAllow = $incomingAllow;
         return $this;
     }
@@ -38,7 +40,8 @@ class VoiceGrant implements Grant {
      *
      * @return string the outgoing application sid
      */
-    public function getOutgoingApplicationSid(): string {
+    public function getOutgoingApplicationSid()
+    {
         return $this->outgoingApplicationSid;
     }
 
@@ -49,7 +52,8 @@ class VoiceGrant implements Grant {
      *
      * @return $this updated grant
      */
-    public function setOutgoingApplicationSid(string $outgoingApplicationSid): self {
+    public function setOutgoingApplicationSid($outgoingApplicationSid)
+    {
         $this->outgoingApplicationSid = $outgoingApplicationSid;
         return $this;
     }
@@ -59,7 +63,8 @@ class VoiceGrant implements Grant {
      *
      * @return array the outgoing application params
      */
-    public function getOutgoingApplicationParams(): array {
+    public function getOutgoingApplicationParams()
+    {
         return $this->outgoingApplicationParams;
     }
 
@@ -67,11 +72,11 @@ class VoiceGrant implements Grant {
      * Set the outgoing application of the the grant
      *
      * @param string $sid outgoing application sid of the grant
-     * @param array $params params to pass the the application
+     * @param string $params params to pass the the application
      *
      * @return $this updated grant
      */
-    public function setOutgoingApplication(string $sid, array $params): self {
+    public function setOutgoingApplication($sid, $params) {
         $this->outgoingApplicationSid = $sid;
         $this->outgoingApplicationParams = $params;
         return $this;
@@ -82,7 +87,8 @@ class VoiceGrant implements Grant {
      *
      * @return string the push credential sid
      */
-    public function getPushCredentialSid(): string {
+    public function getPushCredentialSid()
+    {
         return $this->pushCredentialSid;
     }
 
@@ -93,7 +99,8 @@ class VoiceGrant implements Grant {
      *
      * @return $this updated grant
      */
-    public function setPushCredentialSid(string $pushCredentialSid): self {
+    public function setPushCredentialSid($pushCredentialSid)
+    {
         $this->pushCredentialSid = $pushCredentialSid;
         return $this;
     }
@@ -103,7 +110,8 @@ class VoiceGrant implements Grant {
      *
      * @return string the endpoint id
      */
-    public function getEndpointId(): string {
+    public function getEndpointId()
+    {
         return $this->endpointId;
     }
 
@@ -114,7 +122,8 @@ class VoiceGrant implements Grant {
      *
      * @return $this updated grant
      */
-    public function setEndpointId(string $endpointId): self {
+    public function setEndpointId($endpointId)
+    {
         $this->endpointId = $endpointId;
         return $this;
     }
@@ -124,8 +133,9 @@ class VoiceGrant implements Grant {
      *
      * @return string type of the grant
      */
-    public function getGrantKey(): string {
-        return 'voice';
+    public function getGrantKey()
+    {
+        return "voice";
     }
 
     /**
@@ -133,16 +143,17 @@ class VoiceGrant implements Grant {
      *
      * @return array data of the grant
      */
-    public function getPayload(): array {
-        $payload = [];
-        if ($this->incomingAllow === true) {
-            $incoming = [];
+    public function getPayload()
+    {
+        $payload = array();
+        if ($this->incomingAllow == true) {
+            $incoming = array();
             $incoming['allow'] = true;
             $payload['incoming'] = $incoming;
         }
 
         if ($this->outgoingApplicationSid) {
-            $outgoing = [];
+            $outgoing = array();
             $outgoing['application_sid'] = $this->outgoingApplicationSid;
 
             if ($this->outgoingApplicationParams) {
@@ -162,4 +173,6 @@ class VoiceGrant implements Grant {
 
         return $payload;
     }
+
+
 }

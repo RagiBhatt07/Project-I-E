@@ -17,26 +17,17 @@ class Reject extends TwiML {
      *
      * @param array $attributes Optional attributes
      */
-    public function __construct($attributes = []) {
+    public function __construct($attributes = array()) {
         parent::__construct('Reject', null, $attributes);
-    }
-
-    /**
-     * Add Parameter child.
-     *
-     * @param array $attributes Optional attributes
-     * @return Parameter Child element.
-     */
-    public function parameter($attributes = []): Parameter {
-        return $this->nest(new Parameter($attributes));
     }
 
     /**
      * Add Reason attribute.
      *
      * @param string $reason Rejection reason
+     * @return static $this.
      */
-    public function setReason($reason): self {
+    public function setReason($reason) {
         return $this->setAttribute('reason', $reason);
     }
 }

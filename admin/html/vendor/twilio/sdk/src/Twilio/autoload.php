@@ -58,7 +58,7 @@ class SplClassLoader {
      *
      * @param string $sep The separator to use.
      */
-    public function setNamespaceSeparator($sep): void {
+    public function setNamespaceSeparator($sep) {
         $this->_namespaceSeparator = $sep;
     }
 
@@ -67,7 +67,7 @@ class SplClassLoader {
      *
      * @return string The separator to use.
      */
-    public function getNamespaceSeparator(): string {
+    public function getNamespaceSeparator() {
         return $this->_namespaceSeparator;
     }
 
@@ -76,7 +76,7 @@ class SplClassLoader {
      *
      * @param string $includePath
      */
-    public function setIncludePath($includePath): void {
+    public function setIncludePath($includePath) {
         $this->_includePath = $includePath;
     }
 
@@ -85,7 +85,7 @@ class SplClassLoader {
      *
      * @return string $includePath
      */
-    public function getIncludePath(): string {
+    public function getIncludePath() {
         return $this->_includePath;
     }
 
@@ -94,7 +94,7 @@ class SplClassLoader {
      *
      * @param string $fileExtension
      */
-    public function setFileExtension($fileExtension): void {
+    public function setFileExtension($fileExtension) {
         $this->_fileExtension = $fileExtension;
     }
 
@@ -103,22 +103,22 @@ class SplClassLoader {
      *
      * @return string $fileExtension
      */
-    public function getFileExtension(): string {
+    public function getFileExtension() {
         return $this->_fileExtension;
     }
 
     /**
      * Installs this class loader on the SPL autoload stack.
      */
-    public function register(): void {
-        \spl_autoload_register([$this, 'loadClass']);
+    public function register() {
+        \spl_autoload_register(array($this, 'loadClass'));
     }
 
     /**
      * Uninstalls this class loader from the SPL autoloader stack.
      */
-    public function unregister(): void {
-        \spl_autoload_unregister([$this, 'loadClass']);
+    public function unregister() {
+        \spl_autoload_unregister(array($this, 'loadClass'));
     }
 
     /**
@@ -127,7 +127,7 @@ class SplClassLoader {
      * @param string $className The name of the class to load.
      * @return void
      */
-    public function loadClass($className): void {
+    public function loadClass($className) {
         if (null === $this->_namespace || $this->_namespace . $this->_namespaceSeparator === \substr($className, 0, \strlen($this->_namespace . $this->_namespaceSeparator))) {
             $fileName = '';
             $namespace = '';

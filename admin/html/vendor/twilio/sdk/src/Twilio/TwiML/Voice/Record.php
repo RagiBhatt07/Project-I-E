@@ -17,7 +17,7 @@ class Record extends TwiML {
      *
      * @param array $attributes Optional attributes
      */
-    public function __construct($attributes = []) {
+    public function __construct($attributes = array()) {
         parent::__construct('Record', null, $attributes);
     }
 
@@ -25,8 +25,9 @@ class Record extends TwiML {
      * Add Action attribute.
      *
      * @param string $action Action URL
+     * @return static $this.
      */
-    public function setAction($action): self {
+    public function setAction($action) {
         return $this->setAttribute('action', $action);
     }
 
@@ -34,8 +35,9 @@ class Record extends TwiML {
      * Add Method attribute.
      *
      * @param string $method Action URL method
+     * @return static $this.
      */
-    public function setMethod($method): self {
+    public function setMethod($method) {
         return $this->setAttribute('method', $method);
     }
 
@@ -43,8 +45,9 @@ class Record extends TwiML {
      * Add Timeout attribute.
      *
      * @param int $timeout Timeout to begin recording
+     * @return static $this.
      */
-    public function setTimeout($timeout): self {
+    public function setTimeout($timeout) {
         return $this->setAttribute('timeout', $timeout);
     }
 
@@ -52,8 +55,9 @@ class Record extends TwiML {
      * Add FinishOnKey attribute.
      *
      * @param string $finishOnKey Finish recording on key
+     * @return static $this.
      */
-    public function setFinishOnKey($finishOnKey): self {
+    public function setFinishOnKey($finishOnKey) {
         return $this->setAttribute('finishOnKey', $finishOnKey);
     }
 
@@ -61,8 +65,9 @@ class Record extends TwiML {
      * Add MaxLength attribute.
      *
      * @param int $maxLength Max time to record in seconds
+     * @return static $this.
      */
-    public function setMaxLength($maxLength): self {
+    public function setMaxLength($maxLength) {
         return $this->setAttribute('maxLength', $maxLength);
     }
 
@@ -70,8 +75,9 @@ class Record extends TwiML {
      * Add PlayBeep attribute.
      *
      * @param bool $playBeep Play beep
+     * @return static $this.
      */
-    public function setPlayBeep($playBeep): self {
+    public function setPlayBeep($playBeep) {
         return $this->setAttribute('playBeep', $playBeep);
     }
 
@@ -79,8 +85,9 @@ class Record extends TwiML {
      * Add Trim attribute.
      *
      * @param string $trim Trim the recording
+     * @return static $this.
      */
-    public function setTrim($trim): self {
+    public function setTrim($trim) {
         return $this->setAttribute('trim', $trim);
     }
 
@@ -88,8 +95,9 @@ class Record extends TwiML {
      * Add RecordingStatusCallback attribute.
      *
      * @param string $recordingStatusCallback Status callback URL
+     * @return static $this.
      */
-    public function setRecordingStatusCallback($recordingStatusCallback): self {
+    public function setRecordingStatusCallback($recordingStatusCallback) {
         return $this->setAttribute('recordingStatusCallback', $recordingStatusCallback);
     }
 
@@ -97,18 +105,19 @@ class Record extends TwiML {
      * Add RecordingStatusCallbackMethod attribute.
      *
      * @param string $recordingStatusCallbackMethod Status callback URL method
+     * @return static $this.
      */
-    public function setRecordingStatusCallbackMethod($recordingStatusCallbackMethod): self {
+    public function setRecordingStatusCallbackMethod($recordingStatusCallbackMethod) {
         return $this->setAttribute('recordingStatusCallbackMethod', $recordingStatusCallbackMethod);
     }
 
     /**
      * Add RecordingStatusCallbackEvent attribute.
      *
-     * @param string[] $recordingStatusCallbackEvent Recording status callback
-     *                                               events
+     * @param string $recordingStatusCallbackEvent Recording status callback events
+     * @return static $this.
      */
-    public function setRecordingStatusCallbackEvent($recordingStatusCallbackEvent): self {
+    public function setRecordingStatusCallbackEvent($recordingStatusCallbackEvent) {
         return $this->setAttribute('recordingStatusCallbackEvent', $recordingStatusCallbackEvent);
     }
 
@@ -116,8 +125,9 @@ class Record extends TwiML {
      * Add Transcribe attribute.
      *
      * @param bool $transcribe Transcribe the recording
+     * @return static $this.
      */
-    public function setTranscribe($transcribe): self {
+    public function setTranscribe($transcribe) {
         return $this->setAttribute('transcribe', $transcribe);
     }
 
@@ -125,8 +135,9 @@ class Record extends TwiML {
      * Add TranscribeCallback attribute.
      *
      * @param string $transcribeCallback Transcribe callback URL
+     * @return static $this.
      */
-    public function setTranscribeCallback($transcribeCallback): self {
+    public function setTranscribeCallback($transcribeCallback) {
         return $this->setAttribute('transcribeCallback', $transcribeCallback);
     }
 }

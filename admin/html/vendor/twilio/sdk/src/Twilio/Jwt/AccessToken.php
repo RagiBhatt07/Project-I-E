@@ -12,25 +12,23 @@ class AccessToken {
     private $ttl;
     private $identity;
     private $nbf;
-    private $region;
     /** @var Grant[] $grants */
     private $grants;
     /** @var string[] $customClaims */
     private $customClaims;
 
-    public function __construct(string $accountSid, string $signingKeySid, string $secret, int $ttl = 3600, string $identity = null, string $region = null) {
+    public function __construct($accountSid, $signingKeySid, $secret, $ttl = 3600, $identity = null) {
         $this->signingKeySid = $signingKeySid;
         $this->accountSid = $accountSid;
         $this->secret = $secret;
         $this->ttl = $ttl;
-        $this->region = $region;
 
-        if ($identity !== null) {
+        if (!\is_null($identity)) {
             $this->identity = $identity;
         }
 
-        $this->grants = [];
-        $this->customClaims = [];
+        $this->grants = array();
+        $this->customClaims = array();
     }
 
     /**
@@ -40,7 +38,7 @@ class AccessToken {
      *
      * @return $this updated access token
      */
-    public function setIdentity(string $identity): self {
+    public function setIdentity($identity) {
         $this->identity = $identity;
         return $this;
     }
@@ -50,18 +48,18 @@ class AccessToken {
      *
      * @return string the identity
      */
-    public function getIdentity(): string {
+    public function getIdentity() {
         return $this->identity;
     }
 
     /**
      * Set the nbf of this access token
      *
-     * @param int $nbf nbf in epoch seconds of the grant
+     * @param integer $nbf nbf in epoch seconds of the grant
      *
      * @return $this updated access token
      */
-    public function setNbf(int $nbf): self {
+    public function setNbf($nbf) {
         $this->nbf = $nbf;
         return $this;
     }
@@ -69,31 +67,10 @@ class AccessToken {
     /**
      * Returns the nbf of the grant
      *
-     * @return int the nbf in epoch seconds
+     * @return integer the nbf in epoch seconds
      */
-    public function getNbf(): int {
+    public function getNbf() {
         return $this->nbf;
-    }
-
-    /**
-     * Set the region of this access token
-     *
-     * @param string $region Home region of the account sid in this access token
-     *
-     * @return $this updated access token
-     */
-    public function setRegion(string $region): self {
-        $this->region = $region;
-        return $this;
-    }
-
-    /**
-     * Returns the region of this access token
-     *
-     * @return string Home region of the account sid in this access token
-     */
-    public function getRegion(): string {
-        return $this->region;
     }
 
     /**
@@ -103,7 +80,7 @@ class AccessToken {
      *
      * @return $this the updated access token
      */
-    public function addGrant(Grant $grant): self {
+    public function addGrant(Grant $grant) {
         $this->grants[] = $grant;
         return $this;
     }
@@ -114,23 +91,19 @@ class AccessToken {
      * @param string $name
      * @param string $value
      */
-    public function addClaim(string $name, string $value): void {
+    public function addClaim($name, $value) {
         $this->customClaims[$name] = $value;
     }
 
-    public function toJWT(string $algorithm = 'HS256'): string {
-        $header = [
+    public function toJWT($algorithm = 'HS256') {
+        $header = array(
             'cty' => 'twilio-fpa;v=1',
             'typ' => 'JWT'
-        ];
-
-        if ($this->region) {
-            $header['twr'] = $this->region;
-        }
+        );
 
         $now = \time();
 
-        $grants = [];
+        $grants = array();
         if ($this->identity) {
             $grants['identity'] = $this->identity;
         }
@@ -148,22 +121,22 @@ class AccessToken {
             $grants = \json_decode('{}');
         }
 
-        $payload = \array_merge($this->customClaims, [
+        $payload = \array_merge($this->customClaims, array(
             'jti' => $this->signingKeySid . '-' . $now,
             'iss' => $this->signingKeySid,
             'sub' => $this->accountSid,
             'exp' => $now + $this->ttl,
             'grants' => $grants
-        ]);
+        ));
 
-        if ($this->nbf !== null) {
+        if (!\is_null($this->nbf)) {
             $payload['nbf'] = $this->nbf;
         }
 
         return JWT::encode($payload, $this->secret, $algorithm, $header);
     }
 
-    public function __toString(): string {
+    public function __toString() {
         return $this->toJWT();
     }
 }

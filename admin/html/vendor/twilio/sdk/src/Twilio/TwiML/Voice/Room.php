@@ -18,7 +18,7 @@ class Room extends TwiML {
      * @param string $name Room name
      * @param array $attributes Optional attributes
      */
-    public function __construct($name, $attributes = []) {
+    public function __construct($name, $attributes = array()) {
         parent::__construct('Room', $name, $attributes);
     }
 
@@ -27,8 +27,9 @@ class Room extends TwiML {
      *
      * @param string $participantIdentity Participant identity when connecting to
      *                                    the Room
+     * @return static $this.
      */
-    public function setParticipantIdentity($participantIdentity): self {
+    public function setParticipantIdentity($participantIdentity) {
         return $this->setAttribute('participantIdentity', $participantIdentity);
     }
 }

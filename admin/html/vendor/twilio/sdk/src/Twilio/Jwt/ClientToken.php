@@ -13,7 +13,6 @@ class ClientToken {
     public $authToken;
     /** @var ScopeURI[] $scopes */
     public $scopes;
-    public $clientName;
     /** @var string[] $customClaims */
     private $customClaims;
 
@@ -27,12 +26,12 @@ class ClientToken {
      * @param string $authToken the secret key used to sign the token. Note,
      *        this auth token is not visible to the user of the token.
      */
-    public function __construct(string $accountSid, string $authToken) {
+    public function __construct($accountSid, $authToken) {
         $this->accountSid = $accountSid;
         $this->authToken = $authToken;
-        $this->scopes = [];
+        $this->scopes = array();
         $this->clientName = false;
-        $this->customClaims = [];
+        $this->customClaims = array();
     }
 
     /**
@@ -40,23 +39,25 @@ class ClientToken {
      * connections then configure the TwilioCapability through this method and
      * specify the client name.
      *
-     * @param string $clientName
+     * @param $clientName
      * @throws \InvalidArgumentException
      */
-    public function allowClientIncoming(string $clientName): void {
+    public function allowClientIncoming($clientName) {
+
         // clientName must be a non-zero length alphanumeric string
         if (\preg_match('/\W/', $clientName)) {
             throw new \InvalidArgumentException(
                 'Only alphanumeric characters allowed in client name.');
         }
 
-        if ($clientName === '') {
+        if (\strlen($clientName) == 0) {
             throw new \InvalidArgumentException(
                 'Client name must not be a zero length string.');
         }
 
         $this->clientName = $clientName;
-        $this->allow('client', 'incoming', ['clientName' => $clientName]);
+        $this->allow('client', 'incoming',
+            array('clientName' => $clientName));
     }
 
     /**
@@ -66,11 +67,10 @@ class ClientToken {
      * @param mixed[] $appParams signed parameters that the user of this token
      *        cannot overwrite.
      */
-    public function allowClientOutgoing(string $appSid, array $appParams = []): void {
-        $this->allow('client', 'outgoing', [
+    public function allowClientOutgoing($appSid, array $appParams = array()) {
+        $this->allow('client', 'outgoing', array(
             'appSid' => $appSid,
-            'appParams' => \http_build_query($appParams, '', '&')
-        ]);
+            'appParams' => \http_build_query($appParams, '', '&')));
     }
 
     /**
@@ -78,11 +78,11 @@ class ClientToken {
      *
      * @param mixed[] $filters key/value filters to apply to the event stream
      */
-    public function allowEventStream(array $filters = []): void {
-        $this->allow('stream', 'subscribe', [
+    public function allowEventStream(array $filters = array()) {
+        $this->allow('stream', 'subscribe', array(
             'path' => '/2010-04-01/Events',
             'params' => \http_build_query($filters, '', '&'),
-        ]);
+        ));
     }
 
     /**
@@ -91,7 +91,7 @@ class ClientToken {
      * @param string $name
      * @param string $value
      */
-    public function addClaim(string $name, string $value): void {
+    public function addClaim($name, $value) {
         $this->customClaims[$name] = $value;
     }
 
@@ -101,20 +101,20 @@ class ClientToken {
      *
      * @param int $ttl the expiration time of the token (in seconds). Default
      *        value is 3600 (1hr)
-     * @return string the newly generated token that is valid for $ttl seconds
+     * @return ClientToken the newly generated token that is valid for $ttl
+     *         seconds
      */
-    public function generateToken(int $ttl = 3600): string {
-        $payload = \array_merge($this->customClaims, [
-            'scope' => [],
+    public function generateToken($ttl = 3600) {
+        $payload = \array_merge($this->customClaims, array(
+            'scope' => array(),
             'iss' => $this->accountSid,
             'exp' => \time() + $ttl,
-        ]);
-        $scopeStrings = [];
+        ));
+        $scopeStrings = array();
 
         foreach ($this->scopes as $scope) {
-            if ($scope->privilege === 'outgoing' && $this->clientName) {
-                $scope->params['clientName'] = $this->clientName;
-            }
+            if ($scope->privilege == "outgoing" && $this->clientName)
+                $scope->params["clientName"] = $this->clientName;
             $scopeStrings[] = $scope->toString();
         }
 
@@ -122,7 +122,7 @@ class ClientToken {
         return JWT::encode($payload, $this->authToken, 'HS256');
     }
 
-    protected function allow(string $service, string $privilege, array $params): void {
+    protected function allow($service, $privilege, $params) {
         $this->scopes[] = new ScopeURI($service, $privilege, $params);
     }
 }

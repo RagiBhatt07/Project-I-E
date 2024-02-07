@@ -17,7 +17,7 @@ class Connect extends TwiML {
      *
      * @param array $attributes Optional attributes
      */
-    public function __construct($attributes = []) {
+    public function __construct($attributes = array()) {
         parent::__construct('Connect', null, $attributes);
     }
 
@@ -28,7 +28,7 @@ class Connect extends TwiML {
      * @param array $attributes Optional attributes
      * @return Room Child element.
      */
-    public function room($name, $attributes = []): Room {
+    public function room($name, $attributes = array()) {
         return $this->nest(new Room($name, $attributes));
     }
 
@@ -38,7 +38,7 @@ class Connect extends TwiML {
      * @param string $name Autopilot assistant sid or unique name
      * @return Autopilot Child element.
      */
-    public function autopilot($name): Autopilot {
+    public function autopilot($name) {
         return $this->nest(new Autopilot($name));
     }
 
@@ -48,36 +48,17 @@ class Connect extends TwiML {
      * @param array $attributes Optional attributes
      * @return Stream Child element.
      */
-    public function stream($attributes = []): Stream {
+    public function stream($attributes = array()) {
         return $this->nest(new Stream($attributes));
-    }
-
-    /**
-     * Add VirtualAgent child.
-     *
-     * @param array $attributes Optional attributes
-     * @return VirtualAgent Child element.
-     */
-    public function virtualAgent($attributes = []): VirtualAgent {
-        return $this->nest(new VirtualAgent($attributes));
-    }
-
-    /**
-     * Add Conversation child.
-     *
-     * @param array $attributes Optional attributes
-     * @return Conversation Child element.
-     */
-    public function conversation($attributes = []): Conversation {
-        return $this->nest(new Conversation($attributes));
     }
 
     /**
      * Add Action attribute.
      *
      * @param string $action Action URL
+     * @return static $this.
      */
-    public function setAction($action): self {
+    public function setAction($action) {
         return $this->setAttribute('action', $action);
     }
 
@@ -85,8 +66,9 @@ class Connect extends TwiML {
      * Add Method attribute.
      *
      * @param string $method Action URL method
+     * @return static $this.
      */
-    public function setMethod($method): self {
+    public function setMethod($method) {
         return $this->setAttribute('method', $method);
     }
 }

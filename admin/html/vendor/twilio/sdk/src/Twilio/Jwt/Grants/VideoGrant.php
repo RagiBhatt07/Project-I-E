@@ -13,7 +13,7 @@ class VideoGrant implements Grant {
      *
      * @return string room name or sid set in this grant
      */
-    public function getRoom(): string {
+    public function getRoom() {
         return $this->room;
     }
 
@@ -23,7 +23,7 @@ class VideoGrant implements Grant {
      * @param string $roomSidOrName room sid or name
      * @return $this updated grant
      */
-    public function setRoom(string $roomSidOrName): self {
+    public function setRoom($roomSidOrName) {
         $this->room = $roomSidOrName;
         return $this;
     }
@@ -33,7 +33,7 @@ class VideoGrant implements Grant {
      *
      * @return string type of the grant
      */
-    public function getGrantKey(): string {
+    public function getGrantKey() {
         return 'video';
     }
 
@@ -42,11 +42,12 @@ class VideoGrant implements Grant {
      *
      * @return array data of the grant
      */
-    public function getPayload(): array {
-        $payload = [];
+    public function getPayload() {
+        $payload = array();
         if ($this->room) {
             $payload['room'] = $this->room;
         }
         return $payload;
     }
+
 }

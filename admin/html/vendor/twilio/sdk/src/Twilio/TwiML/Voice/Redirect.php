@@ -18,7 +18,7 @@ class Redirect extends TwiML {
      * @param string $url Redirect URL
      * @param array $attributes Optional attributes
      */
-    public function __construct($url, $attributes = []) {
+    public function __construct($url, $attributes = array()) {
         parent::__construct('Redirect', $url, $attributes);
     }
 
@@ -26,8 +26,9 @@ class Redirect extends TwiML {
      * Add Method attribute.
      *
      * @param string $method Redirect URL method
+     * @return static $this.
      */
-    public function setMethod($method): self {
+    public function setMethod($method) {
         return $this->setAttribute('method', $method);
     }
 }

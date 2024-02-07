@@ -18,7 +18,7 @@ class Play extends TwiML {
      * @param string $url Media URL
      * @param array $attributes Optional attributes
      */
-    public function __construct($url = null, $attributes = []) {
+    public function __construct($url = null, $attributes = array()) {
         parent::__construct('Play', $url, $attributes);
     }
 
@@ -26,8 +26,9 @@ class Play extends TwiML {
      * Add Loop attribute.
      *
      * @param int $loop Times to loop media
+     * @return static $this.
      */
-    public function setLoop($loop): self {
+    public function setLoop($loop) {
         return $this->setAttribute('loop', $loop);
     }
 
@@ -35,8 +36,9 @@ class Play extends TwiML {
      * Add Digits attribute.
      *
      * @param string $digits Play DTMF tones for digits
+     * @return static $this.
      */
-    public function setDigits($digits): self {
+    public function setDigits($digits) {
         return $this->setAttribute('digits', $digits);
     }
 }

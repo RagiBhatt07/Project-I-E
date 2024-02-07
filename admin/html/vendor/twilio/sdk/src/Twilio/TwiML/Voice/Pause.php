@@ -17,7 +17,7 @@ class Pause extends TwiML {
      *
      * @param array $attributes Optional attributes
      */
-    public function __construct($attributes = []) {
+    public function __construct($attributes = array()) {
         parent::__construct('Pause', null, $attributes);
     }
 
@@ -25,8 +25,9 @@ class Pause extends TwiML {
      * Add Length attribute.
      *
      * @param int $length Length in seconds to pause
+     * @return static $this.
      */
-    public function setLength($length): self {
+    public function setLength($length) {
         return $this->setAttribute('length', $length);
     }
 }

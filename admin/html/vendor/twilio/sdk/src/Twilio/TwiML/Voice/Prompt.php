@@ -17,7 +17,7 @@ class Prompt extends TwiML {
      *
      * @param array $attributes Optional attributes
      */
-    public function __construct($attributes = []) {
+    public function __construct($attributes = array()) {
         parent::__construct('Prompt', null, $attributes);
     }
 
@@ -28,7 +28,7 @@ class Prompt extends TwiML {
      * @param array $attributes Optional attributes
      * @return Say Child element.
      */
-    public function say($message, $attributes = []): Say {
+    public function say($message, $attributes = array()) {
         return $this->nest(new Say($message, $attributes));
     }
 
@@ -39,7 +39,7 @@ class Prompt extends TwiML {
      * @param array $attributes Optional attributes
      * @return Play Child element.
      */
-    public function play($url = null, $attributes = []): Play {
+    public function play($url = null, $attributes = array()) {
         return $this->nest(new Play($url, $attributes));
     }
 
@@ -49,7 +49,7 @@ class Prompt extends TwiML {
      * @param array $attributes Optional attributes
      * @return Pause Child element.
      */
-    public function pause($attributes = []): Pause {
+    public function pause($attributes = array()) {
         return $this->nest(new Pause($attributes));
     }
 
@@ -57,45 +57,39 @@ class Prompt extends TwiML {
      * Add For_ attribute.
      *
      * @param string $for_ Name of the payment source data element
+     * @return static $this.
      */
-    public function setFor_($for_): self {
+    public function setFor_($for_) {
         return $this->setAttribute('for_', $for_);
     }
 
     /**
      * Add ErrorType attribute.
      *
-     * @param string[] $errorType Type of error
+     * @param string $errorType Type of error
+     * @return static $this.
      */
-    public function setErrorType($errorType): self {
+    public function setErrorType($errorType) {
         return $this->setAttribute('errorType', $errorType);
     }
 
     /**
      * Add CardType attribute.
      *
-     * @param string[] $cardType Type of the credit card
+     * @param string $cardType Type of the credit card
+     * @return static $this.
      */
-    public function setCardType($cardType): self {
+    public function setCardType($cardType) {
         return $this->setAttribute('cardType', $cardType);
     }
 
     /**
      * Add Attempt attribute.
      *
-     * @param int[] $attempt Current attempt count
+     * @param int $attempt Current attempt count
+     * @return static $this.
      */
-    public function setAttempt($attempt): self {
+    public function setAttempt($attempt) {
         return $this->setAttribute('attempt', $attempt);
-    }
-
-    /**
-     * Add RequireMatchingInputs attribute.
-     *
-     * @param bool $requireMatchingInputs Require customer to input requested
-     *                                    information twice and verify matching.
-     */
-    public function setRequireMatchingInputs($requireMatchingInputs): self {
-        return $this->setAttribute('requireMatchingInputs', $requireMatchingInputs);
     }
 }

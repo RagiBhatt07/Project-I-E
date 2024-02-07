@@ -2,7 +2,6 @@
 
 
 namespace Twilio\Jwt\TaskRouter;
-
 use Twilio\Jwt\JWT;
 
 
@@ -27,15 +26,14 @@ class CapabilityToken {
     protected $channelId;
     protected $resourceUrl;
 
-    protected $required = ['required' => true];
-    protected $optional = ['required' => false];
+    protected $required = array("required" => true);
+    protected $optional = array("required" => false);
 
-    public function __construct(string $accountSid, string $authToken, string $workspaceSid, string $channelId,
-                                string $resourceUrl = null, string $overrideBaseUrl = null, string $overrideBaseWSUrl = null) {
+    public function __construct($accountSid, $authToken, $workspaceSid, $channelId, $resourceUrl = null, $overrideBaseUrl = null, $overrideBaseWSUrl = null) {
         $this->accountSid = $accountSid;
         $this->authToken = $authToken;
         $this->friendlyName = $channelId;
-        $this->policies = [];
+        $this->policies = array();
 
         $this->workspaceSid = $workspaceSid;
         $this->channelId = $channelId;
@@ -45,7 +43,7 @@ class CapabilityToken {
         if (isset($overrideBaseWSUrl)) {
             $this->baseWsUrl = $overrideBaseWSUrl;
         }
-        $this->baseUrl .= '/Workspaces/' . $workspaceSid;
+        $this->baseUrl = $this->baseUrl . '/Workspaces/' . $workspaceSid;
 
         $this->validateJWT();
 
@@ -54,83 +52,84 @@ class CapabilityToken {
         }
 
         //add permissions to GET and POST to the event-bridge channel
-        $this->allow($this->baseWsUrl . '/' . $this->accountSid . '/' . $this->channelId, 'GET', null, null);
-        $this->allow($this->baseWsUrl . '/' . $this->accountSid . '/' . $this->channelId, 'POST', null, null);
+        $this->allow($this->baseWsUrl . "/" . $this->accountSid . "/" . $this->channelId, "GET", null, null);
+        $this->allow($this->baseWsUrl . "/" . $this->accountSid . "/" . $this->channelId, "POST", null, null);
 
         //add permissions to fetch the instance resource
-        $this->allow($this->resourceUrl, 'GET', null, null);
+        $this->allow($this->resourceUrl, "GET", null, null);
     }
 
-    protected function setupResource(): void {
+    protected function setupResource() {
+
     }
 
-    public function addPolicyDeconstructed(string $url, string $method, ?array $queryFilter = [], ?array $postFilter = [], bool $allow = true): Policy {
+    public function addPolicyDeconstructed($url, $method, $queryFilter = array(), $postFilter = array(), $allow = true) {
         $policy = new Policy($url, $method, $queryFilter, $postFilter, $allow);
-        $this->policies[] = $policy;
+        \array_push($this->policies, $policy);
         return $policy;
     }
 
-    public function allow(string $url, string $method, ?array $queryFilter = [], ?array $postFilter = []): void {
+    public function allow($url, $method, $queryFilter = array(), $postFilter = array()) {
         $this->addPolicyDeconstructed($url, $method, $queryFilter, $postFilter, true);
     }
 
-    public function deny(string $url, string $method, array $queryFilter = [], array $postFilter = []): void {
+    public function deny($url, $method, $queryFilter = array(), $postFilter = array()) {
         $this->addPolicyDeconstructed($url, $method, $queryFilter, $postFilter, false);
     }
 
-    private function validateJWT(): void {
-        if (!isset($this->accountSid) || \strpos($this->accountSid, 'AC') !== 0) {
-            throw new \Exception('Invalid AccountSid provided: ' . $this->accountSid);
+    private function validateJWT() {
+        if (!isset($this->accountSid) || \substr($this->accountSid, 0, 2) != 'AC') {
+            throw new \Exception("Invalid AccountSid provided: " . $this->accountSid);
         }
-        if (!isset($this->workspaceSid) || \strpos($this->workspaceSid, 'WS') !== 0) {
-            throw new \Exception('Invalid WorkspaceSid provided: ' . $this->workspaceSid);
+        if (!isset($this->workspaceSid) || \substr($this->workspaceSid, 0, 2) != 'WS') {
+            throw new \Exception("Invalid WorkspaceSid provided: " . $this->workspaceSid);
         }
         if (!isset($this->channelId)) {
-            throw new \Exception('ChannelId not provided');
+            throw new \Exception("ChannelId not provided");
         }
         $prefix = \substr($this->channelId, 0, 2);
-        if ($prefix !== 'WS' && $prefix !== 'WK' && $prefix !== 'WQ') {
+        if ($prefix != 'WS' && $prefix != 'WK' && $prefix != 'WQ') {
             throw new \Exception("Invalid ChannelId provided: " . $this->channelId);
         }
     }
 
-    public function allowFetchSubresources(): void {
+    public function allowFetchSubresources() {
         $method = 'GET';
-        $queryFilter = [];
-        $postFilter = [];
+        $queryFilter = array();
+        $postFilter = array();
         $this->allow($this->resourceUrl . '/**', $method, $queryFilter, $postFilter);
     }
 
-    public function allowUpdates(): void {
+    public function allowUpdates() {
         $method = 'POST';
-        $queryFilter = [];
-        $postFilter = [];
+        $queryFilter = array();
+        $postFilter = array();
         $this->allow($this->resourceUrl, $method, $queryFilter, $postFilter);
     }
 
-    public function allowUpdatesSubresources(): void {
+    public function allowUpdatesSubresources() {
         $method = 'POST';
-        $queryFilter = [];
-        $postFilter = [];
+        $queryFilter = array();
+        $postFilter = array();
         $this->allow($this->resourceUrl . '/**', $method, $queryFilter, $postFilter);
     }
 
-    public function allowDelete(): void {
+    public function allowDelete() {
         $method = 'DELETE';
-        $queryFilter = [];
-        $postFilter = [];
+        $queryFilter = array();
+        $postFilter = array();
         $this->allow($this->resourceUrl, $method, $queryFilter, $postFilter);
     }
 
-    public function allowDeleteSubresources(): void {
+    public function allowDeleteSubresources() {
         $method = 'DELETE';
-        $queryFilter = [];
-        $postFilter = [];
+        $queryFilter = array();
+        $postFilter = array();
         $this->allow($this->resourceUrl . '/**', $method, $queryFilter, $postFilter);
     }
 
-    public function generateToken(int $ttl = 3600, array $extraAttributes = []): string {
-        $payload = [
+    public function generateToken($ttl = 3600, $extraAttributes = array()) {
+        $payload = array(
             'version' => $this->version,
             'friendly_name' => $this->friendlyName,
             'iss' => $this->accountSid,
@@ -138,11 +137,11 @@ class CapabilityToken {
             'account_sid' => $this->accountSid,
             'channel' => $this->channelId,
             'workspace_sid' => $this->workspaceSid
-        ];
+        );
 
-        if (\strpos($this->channelId, 'WK') === 0) {
+        if (\substr($this->channelId, 0, 2) == 'WK') {
             $payload['worker_sid'] = $this->channelId;
-        } else if (\strpos($this->channelId, 'WQ') === 0) {
+        } else if (\substr($this->channelId, 0, 2) == 'WQ') {
             $payload['taskqueue_sid'] = $this->channelId;
         }
 
@@ -150,7 +149,7 @@ class CapabilityToken {
             $payload[$key] = $value;
         }
 
-        $policyStrings = [];
+        $policyStrings = array();
         foreach ($this->policies as $policy) {
             $policyStrings[] = $policy->toArray();
         }

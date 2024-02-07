@@ -2,7 +2,8 @@
 session_start();
 include 'db_conn.php';  // Make sure this path is correct
 
-require_once '/vendor/autoload.php'; // Correct path to the Twilio SDK
+// Include the Composer autoload file
+require_once __DIR__ . '/../../vendor/autoload.php';
 use Twilio\Rest\Client;
 
 // Define the function outside of the if statement
@@ -11,7 +12,7 @@ function notify_students($pdo, $courseID, $twilio_sid, $twilio_token, $twilio_fr
 
     try {
         // Assuming $pdo is passed correctly into the function
-        $stmt = $pdo->prepare("SELECT s.s_phone, c.c_name, c.c_room, c.c_time, c.c_date FROM students s INNER JOIN student_courses sc ON s.s_id = sc.s_id INNER JOIN courses c ON sc.c_id = c.c_id WHERE sc.c_id = ?");
+        $stmt = $pdo->prepare("SELECT s.s_phone, c.c_name, c.c_room, c.c_time, c.c_date FROM register s INNER JOIN student_courses sc ON s.s_id = sc.s_id INNER JOIN courses c ON sc.c_id = c.c_id WHERE sc.c_id = ?");
         $stmt->execute([$courseID]);
         $students = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -34,8 +35,8 @@ function notify_students($pdo, $courseID, $twilio_sid, $twilio_token, $twilio_fr
 }
 
 // Twilio credentials
-$twilio_sid = 'ACdeffc5778c18fb64ec6411e7fd99a765';
-$twilio_token = 'a3528b839229c3089d5ed04993dddb75';
+$twilio_sid = getenv('TWILIO_ACCOUNT_SID');
+$twilio_token = getenv('TWILIO_AUTH_TOKEN');
 $twilio_from_number = '+13203342200';
 
 // Check if course_id is set in the URL

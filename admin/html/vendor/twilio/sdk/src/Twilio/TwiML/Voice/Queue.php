@@ -18,7 +18,7 @@ class Queue extends TwiML {
      * @param string $name Queue name
      * @param array $attributes Optional attributes
      */
-    public function __construct($name, $attributes = []) {
+    public function __construct($name, $attributes = array()) {
         parent::__construct('Queue', $name, $attributes);
     }
 
@@ -26,8 +26,9 @@ class Queue extends TwiML {
      * Add Url attribute.
      *
      * @param string $url Action URL
+     * @return static $this.
      */
-    public function setUrl($url): self {
+    public function setUrl($url) {
         return $this->setAttribute('url', $url);
     }
 
@@ -35,8 +36,9 @@ class Queue extends TwiML {
      * Add Method attribute.
      *
      * @param string $method Action URL method
+     * @return static $this.
      */
-    public function setMethod($method): self {
+    public function setMethod($method) {
         return $this->setAttribute('method', $method);
     }
 
@@ -44,8 +46,9 @@ class Queue extends TwiML {
      * Add ReservationSid attribute.
      *
      * @param string $reservationSid TaskRouter Reservation SID
+     * @return static $this.
      */
-    public function setReservationSid($reservationSid): self {
+    public function setReservationSid($reservationSid) {
         return $this->setAttribute('reservationSid', $reservationSid);
     }
 
@@ -53,8 +56,9 @@ class Queue extends TwiML {
      * Add PostWorkActivitySid attribute.
      *
      * @param string $postWorkActivitySid TaskRouter Activity SID
+     * @return static $this.
      */
-    public function setPostWorkActivitySid($postWorkActivitySid): self {
+    public function setPostWorkActivitySid($postWorkActivitySid) {
         return $this->setAttribute('postWorkActivitySid', $postWorkActivitySid);
     }
 }

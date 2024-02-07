@@ -4,7 +4,6 @@
 namespace Twilio;
 
 
-use Twilio\Http\Response;
 use Twilio\Rest\Client;
 
 /**
@@ -14,7 +13,7 @@ use Twilio\Rest\Client;
  */
 abstract class Domain {
     /**
-     * @var Client Twilio Client
+     * @var \Twilio\Rest\Client Twilio Client
      */
     protected $client;
 
@@ -25,7 +24,7 @@ abstract class Domain {
 
     /**
      * Construct a new Domain
-     * @param Client $client used to communicate with Twilio
+     * @param \Twilio\Rest\Client $client used to communicate with Twilio
      */
     public function __construct(Client $client) {
         $this->client = $client;
@@ -38,8 +37,8 @@ abstract class Domain {
      * @param string $uri Version relative URI
      * @return string Absolute URL for this domain
      */
-    public function absoluteUrl(string $uri): string {
-        return \implode('/', [\trim($this->baseUrl, '/'), \trim($uri, '/')]);
+    public function absoluteUrl($uri) {
+        return \implode('/', array(\trim($this->baseUrl, '/'), \trim($uri, '/')));
     }
 
     /**
@@ -52,13 +51,12 @@ abstract class Domain {
      * @param array $headers HTTP headers to send with the request
      * @param string $user User to authenticate as
      * @param string $password Password
-     * @param int $timeout Request timeout
-     * @return Response the response for the request
+     * @param null $timeout Request timeout
+     * @return \Twilio\Http\Response the response for the request
      */
-    public function request(string $method, string $uri,
-                            array $params = [], array $data = [], array $headers = [],
-                            string $user = null, string $password = null,
-                            int $timeout = null): Response {
+    public function request($method, $uri, $params = array(), $data = array(),
+                            $headers = array(), $user = null, $password=null,
+                            $timeout=null) {
         $url = $this->absoluteUrl($uri);
         return $this->client->request(
             $method,
@@ -72,11 +70,14 @@ abstract class Domain {
         );
     }
 
-    public function getClient(): Client {
+    /**
+     * @return \Twilio\Rest\Client
+     */
+    public function getClient() {
         return $this->client;
     }
 
-    public function __toString(): string {
+    public function __toString() {
         return '[Domain]';
     }
 }

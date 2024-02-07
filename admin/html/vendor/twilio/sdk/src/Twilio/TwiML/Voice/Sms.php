@@ -18,7 +18,7 @@ class Sms extends TwiML {
      * @param string $message Message body
      * @param array $attributes Optional attributes
      */
-    public function __construct($message, $attributes = []) {
+    public function __construct($message, $attributes = array()) {
         parent::__construct('Sms', $message, $attributes);
     }
 
@@ -26,8 +26,9 @@ class Sms extends TwiML {
      * Add To attribute.
      *
      * @param string $to Number to send message to
+     * @return static $this.
      */
-    public function setTo($to): self {
+    public function setTo($to) {
         return $this->setAttribute('to', $to);
     }
 
@@ -35,8 +36,9 @@ class Sms extends TwiML {
      * Add From attribute.
      *
      * @param string $from Number to send message from
+     * @return static $this.
      */
-    public function setFrom($from): self {
+    public function setFrom($from) {
         return $this->setAttribute('from', $from);
     }
 
@@ -44,8 +46,9 @@ class Sms extends TwiML {
      * Add Action attribute.
      *
      * @param string $action Action URL
+     * @return static $this.
      */
-    public function setAction($action): self {
+    public function setAction($action) {
         return $this->setAttribute('action', $action);
     }
 
@@ -53,8 +56,9 @@ class Sms extends TwiML {
      * Add Method attribute.
      *
      * @param string $method Action URL method
+     * @return static $this.
      */
-    public function setMethod($method): self {
+    public function setMethod($method) {
         return $this->setAttribute('method', $method);
     }
 
@@ -62,8 +66,9 @@ class Sms extends TwiML {
      * Add StatusCallback attribute.
      *
      * @param string $statusCallback Status callback URL
+     * @return static $this.
      */
-    public function setStatusCallback($statusCallback): self {
+    public function setStatusCallback($statusCallback) {
         return $this->setAttribute('statusCallback', $statusCallback);
     }
 }
