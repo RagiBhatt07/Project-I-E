@@ -155,6 +155,10 @@ $errorMsg = '';
           <li class="nav-item">
               <a href="subjects.php" class="nav-link">Subjects</a>
           </li>
+    
+          <li class="nav-item">
+              <a href="student_main.php" class="nav-link">Home</a>
+          </li>
       </ul>
   </div>
 </nav>
@@ -188,7 +192,10 @@ $errorMsg = '';
     <?php endfor; ?>
     <?php
 include 'retrieve_courses.php';
-$courses = getCourses();
+$studentId = $_SESSION['user_id'];
+// Use the getStudentCourses function to fetch courses for the logged-in student
+$courses = getStudentCourses($studentId);
+
 
 
 
