@@ -65,6 +65,7 @@
         <a href="student_choice.php" class="button">All Courses</a>
         <a href="display_course.php" class="button">My Courses</a>
         <a href="calendar.php" class="button">Calendar</a>
+        <a href="student_feedback.php" class="button">Feedback</a>
     </div>
 </body>
 </html>
